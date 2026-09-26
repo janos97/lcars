@@ -21,4 +21,5 @@
 @import "./components/data.css" layer(lcars.components);
 @import "./components/table.css" layer(lcars.components);
 @import "./components/form.css" layer(lcars.components);
+@import "./components/dialog.css" layer(lcars.components);
 @import "./utilities.css" layer(lcars.utilities);

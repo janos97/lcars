@@ -7,12 +7,27 @@ A framework-agnostic **LCARS design system** for building Star Trek–style web 
 - **The real LCARS frame:** sidebars, elbows with concave inner fillets, and segmented bars, drawn in pure CSS with no images or masks.
 - **Tokens all the way down.** Colors, sizes, radii and type are CSS custom properties. Re-skin the whole system by overriding a few variables.
 - **One color hook.** Every colored piece reads `--lcars-c`, so `.lcars-c-violet` recolors a block, button, elbow, bracket, meter or table the same way.
-- **Themes:** `classic` (TNG), `nemesis`, `lower-decks` and `red-alert`. A theme can apply to the whole page or to a single subtree.
+- **A theme for every series:** TOS, SNW, DIS, ENT, TNG, DS9, VOY, the TNG films, Lower Decks, Prodigy and Picard, plus red alert. Some themes also change the frame geometry to match their era. A theme can apply to the whole page or to a single subtree.
 - **Cascade layers.** The framework lives in `@layer lcars.*`, so any unlayered CSS of yours beats it without `!important` or specificity fights.
 - **Incremental adoption.** Components work anywhere, and page typography only applies inside `.lcars`.
 - **Accessible defaults:** visible focus rings, `aria-current`/`aria-pressed` states, `role="meter"` support, and animations that respect `prefers-reduced-motion`.
 
-**Live references:** `examples/index.html` (component library with source for every demo), `examples/dashboard.html` (a full app), `examples/starter.html` (a copy-paste template). Run `npm run dev` to browse them.
+**Live references:** `examples/index.html` (component library with source for every demo), `examples/dashboard.html` (a full app), `examples/recipes/` (common patterns), `examples/starter.html` (a copy-paste template). Run `npm run dev` to browse them.
+
+## For AI models and coding agents
+
+The documentation is generated from the source, so it always matches the code. Point your assistant at one of these:
+
+| File | Contents |
+| --- | --- |
+| [`llms-full.txt`](llms-full.txt) | Everything in one file: rules, common mistakes, "which component do I need", the complete reference and every recipe. |
+| [`llms.txt`](llms.txt) | Short index in the [llms.txt](https://llmstxt.org) format. |
+| [`docs/reference.md`](docs/reference.md) | Every class, token, theme, data attribute and JS function. |
+| [`docs/recipes.md`](docs/recipes.md) | Copy-paste markup: app shell, header, sidebar nav, dashboard tiles, section heading, data table, form, tabs, dialog. |
+| [`dist/lcars.manifest.json`](dist/lcars.manifest.json) | The same API as JSON. |
+| [`AGENTS.md`](AGENTS.md) | How agents should use the framework, and how to change this repo. |
+
+For example, in another project: *"Build the UI with the LCARS framework. Follow https://raw.githubusercontent.com/janos97/lcars/master/llms-full.txt."* Tests make sure every CSS class is documented and every documented class exists.
 
 ---
 
@@ -47,13 +62,13 @@ import "lcars/lcars.js";    // optional helpers; safe to import during SSR
 
     <header class="lcars-frame">                       <!-- header: elbow at the bottom -->
       <div class="lcars-frame__side">
-        <div class="lcars-block lcars-grow lcars-c-violet">LCARS</div>
+        <div class="lcars-block lcars-grow lcars-c-secondary">LCARS</div>
       </div>
       <div class="lcars-frame__main"><h1 class="lcars-title">Engineering</h1></div>
-      <div class="lcars-frame__elbow-bottom lcars-c-violet"></div>
+      <div class="lcars-frame__elbow-bottom lcars-c-secondary"></div>
       <div class="lcars-frame__bar-bottom">
-        <span class="lcars-block lcars-grow-3 lcars-c-violet"></span>
-        <span class="lcars-block lcars-c-orange lcars-round-end"></span>
+        <span class="lcars-block lcars-grow-3 lcars-c-secondary"></span>
+        <span class="lcars-block lcars-c-primary lcars-round-end"></span>
       </div>
     </header>
 
@@ -61,11 +76,11 @@ import "lcars/lcars.js";    // optional helpers; safe to import during SSR
       <div class="lcars-frame__elbow-top">Systems</div>
       <div class="lcars-frame__bar-top">
         <span class="lcars-block lcars-grow-2"></span>
-        <span class="lcars-block lcars-c-sunflower"></span>
+        <span class="lcars-block lcars-c-accent"></span>
       </div>
       <nav class="lcars-frame__side">
-        <a class="lcars-block lcars-c-sunflower" href="/" aria-current="page">Home</a>
-        <a class="lcars-block lcars-c-peach" href="/logs">Logs</a>
+        <a class="lcars-block lcars-c-accent" href="/" aria-current="page">Home</a>
+        <a class="lcars-block lcars-c-tertiary" href="/logs">Logs</a>
         <div class="lcars-block lcars-grow"></div>     <!-- filler down to the next elbow -->
       </nav>
       <main class="lcars-frame__main">…your app…</main>
@@ -125,6 +140,7 @@ The geometry is controlled by tokens: `--lcars-side` (sidebar width, fluid by de
 | `.lcars-field` | Label, control and hint, stacked. | `.lcars-hint` |
 | `.lcars-input` | `input`, `select` or `textarea`. | `aria-invalid="true"` switches it to the alert color |
 | `.lcars-check` / `.lcars-switch` / `.lcars-range` | Checkbox or radio, toggle switch, and slider. | Wrap in `.lcars-choice` to pair with text |
+| `.lcars-dialog` | Native `<dialog>` styled as a modal. Open with `showModal()`. | `--lcars-dialog-width` |
 
 **Layout:** `.lcars-app` (full-page column of frames; the last one grows), `.lcars-stack`, `.lcars-cluster`, `.lcars-split`, `.lcars-grid` (auto-fit; tune with `--lcars-grid-min`), and `.lcars-span-all`. They all space with `--lcars-space`.
 
@@ -147,17 +163,35 @@ The geometry is controlled by tokens: `--lcars-side` (sidebar width, fluid by de
 
 **Roles:** `primary secondary tertiary accent muted alert active`, plus `--lcars-bg`, `--lcars-fg`, `--lcars-on-c`, `--lcars-heading`, `--lcars-link` and `--lcars-focus`.
 
-Themes remap only the roles. The exception is `red-alert`, which also turns every swatch red. Apply a theme to the page or to any subtree:
+Use the role classes (`lcars-c-primary`, `-secondary`, `-tertiary`, `-accent`, `-muted`, `-alert`) for your UI chrome so it follows the theme. Use swatch classes only for colors that must stay fixed, such as `lcars-c-green` for "nominal".
+
+| Theme id | Series | Look |
+| --- | --- | --- |
+| `tng` (default) | The Next Generation | Orange, violet, periwinkle |
+| `tos` | The Original Series | Command gold, science blue, operations red; squarer corners |
+| `snw` | Strange New Worlds | Retro-modern gold, teal, red |
+| `dis` | Discovery | Silver-blue with delta gold; thin bars |
+| `ent` | Enterprise | Gunmetal, steel blue, amber; near-square corners |
+| `ds9` | Deep Space Nine | Rust, tan, dusty lavender |
+| `voy` | Voyager | Peach, gold, blue-lilac |
+| `nemesis` | TNG films (First Contact to Nemesis) | Sovereign-class blues and greys |
+| `ld` | Lower Decks | Bright, high contrast |
+| `pro` | Prodigy | Violet, teal, orange |
+| `pic` | Picard | Slate blue, teal, amber; slimmer bars |
+| `red-alert` | Condition red | Everything red, including the swatches |
+
+The colors are fan interpretations, tuned so black text on colored pieces stays readable. They are not screen-accurate reproductions. Apply a theme to the page or to any subtree:
 
 ```html
-<html class="lcars" data-lcars-theme="nemesis">
-<section data-lcars-theme="lower-decks">…</section>
+<html class="lcars" data-lcars-theme="ds9">
+<section data-lcars-theme="pic">…</section>
 ```
 
-**Your own theme.** Define the roles under a new name:
+**Your own theme.** Define the roles under a new name, and optionally some geometry:
 
 ```css
 [data-lcars-theme="borg"] {
+  --lcars-bg: #000;
   --lcars-fg: #b6ffb0;
   --lcars-primary: #33cc66;
   --lcars-secondary: #88aa88;
@@ -168,6 +202,7 @@ Themes remap only the roles. The exception is `red-alert`, which also turns ever
   --lcars-active: #ffffff;
   --lcars-heading: #33cc66;
   --lcars-link: #ccff66;
+  --lcars-inner-radius: 0.25rem;
 }
 ```
 
@@ -184,14 +219,15 @@ Themes remap only the roles. The exception is `red-alert`, which also turns ever
 | `data-lcars-clock` | Live 24 h clock. Use `="hm"` to drop the seconds. |
 | `data-lcars-stardate` | Today's stardate as `YYYY.DDD`. |
 | `data-lcars-cascade="48"` | Fills a `.lcars-data` grid with numbers and animates it. |
-| `data-lcars-set-theme="nemesis"` | Switches theme on click. `""` restores the default. |
+| `data-lcars-set-theme="ds9"` | Switches theme on click. `""` restores the default. |
+| `data-lcars-theme-select` | On a `<select>`: fills itself with every theme and switches on change. |
 | `data-lcars-toggle-alert` | Toggles red alert on click. |
 | `data-lcars-sound[="tap\|confirm\|deny"]` | On an ancestor: clicks on interactive children beep. Use `data-lcars-tone` on a child to override the tone. |
 | `.lcars-meter[aria-valuenow]` | Keeps `--lcars-value` in sync with the ARIA attributes. |
 
 ```js
 import LCARS from "lcars/lcars.js";     // also exposed as window.LCARS
-LCARS.setTheme("nemesis");               // (name, element = <html>)
+LCARS.setTheme("voy");                   // (id, element = <html>); ids in LCARS.THEMES
 LCARS.setAlert(true);                    // red alert; setAlert() toggles
 LCARS.beep("confirm");
 LCARS.init(someElement);                 // upgrade content you rendered
@@ -236,7 +272,7 @@ Current evergreen browsers: Chrome/Edge 111+, Firefox 121+ and Safari 16.4+. The
 npm install
 npm run dev     # http://localhost:4747/examples/ with rebuild-on-save
 npm run build   # src/ → dist/
-npm test        # dist freshness, token/theme consistency, class usage, JS helpers
+npm test        # generated files fresh, every class documented, token/theme consistency, class usage, JS
 ```
 
 ```
@@ -246,15 +282,19 @@ src/css/themes.css       data-lcars-theme blocks
 src/css/base.css         .lcars page scope
 src/css/layout.css       app shell + stack/cluster/grid
 src/css/frame.css        sidebar/elbow/bar frame
-src/css/components/      block, button, bar, bracket, typography, meter, data, table, form
-src/css/utilities.css    color, shape, flex, motion, a11y
-src/js/lcars.js          optional helpers
+src/css/components/      block, button, bar, bracket, typography, meter, data, table, form, dialog
+src/css/utilities.css    color, shape, flex, motion, a11y, states
+src/js/lcars.js          optional helpers (+ THEMES catalogue)
+src/meta/api.mjs         component/utility/JS descriptions, rules, mistakes → docs
+src/recipes/             copy-paste patterns → docs + examples/recipes/
 src/fonts/               Antonio (OFL)
-dist/                    built output (committed)
+scripts/                 build.mjs (CSS + docs), docs.mjs (generator), dev.mjs
+dist/                    built output + lcars.manifest.json (generated, committed)
+docs/, llms.txt, llms-full.txt, examples/recipes/   generated docs (committed)
 examples/                library, dashboard, starter
 ```
 
-`dist/` is committed so that the CDN and git installs work. Run `npm run build` before you commit; the test suite fails if `dist/` is stale.
+Generated files are committed so the CDN, git installs and AI tools can read them directly. Run `npm run build` before you commit; the test suite fails if any generated file is stale. See [`AGENTS.md`](AGENTS.md) for the conventions.
 
 ## Credits and legal
 

@@ -8,6 +8,7 @@
  *   data-lcars-stardate         today's stardate (YYYY.DDD)
  *   data-lcars-cascade="48"     fills a .lcars-data grid with animated numbers
  *   data-lcars-set-theme="x"    click to switch theme ("" = default)
+ *   data-lcars-theme-select     on a <select>: lists every theme and switches on change
  *   data-lcars-toggle-alert     click to toggle red alert
  *   data-lcars-sound            on any ancestor: interactive children beep
  *                               (value picks the tone: tap | confirm | deny)
@@ -21,6 +22,27 @@
 const hasDOM = typeof document !== "undefined";
 const prefersReducedMotion = () =>
   typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ── Theme catalogue ──────────────────────────────────────── */
+
+/**
+ * Every theme in themes.css, in the same order (a test keeps them in sync).
+ * `id` is the data-lcars-theme value.
+ */
+export const THEMES = Object.freeze([
+  { id: "tng", name: "The Next Generation", era: "2364–2370", note: "Canonical LCARS; the default" },
+  { id: "tos", name: "The Original Series", era: "2265–2269", note: "Pre-LCARS primaries, squarer corners" },
+  { id: "snw", name: "Strange New Worlds", era: "2259–", note: "Retro-modern gold, teal, red" },
+  { id: "dis", name: "Discovery", era: "2256–3191", note: "Silver-blue, thin bars" },
+  { id: "ent", name: "Enterprise", era: "2151–2155", note: "Gunmetal and amber, near-square corners" },
+  { id: "ds9", name: "Deep Space Nine", era: "2369–2375", note: "Rust, tan, dusty lavender" },
+  { id: "voy", name: "Voyager", era: "2371–2378", note: "Peach, gold, blue-lilac" },
+  { id: "nemesis", name: "TNG films (First Contact–Nemesis)", era: "2373–2379", note: "Sovereign-class blues" },
+  { id: "ld", name: "Lower Decks", era: "2380–", note: "Bright, high contrast" },
+  { id: "pro", name: "Prodigy", era: "2383–", note: "Violet, teal, orange" },
+  { id: "pic", name: "Picard", era: "2399–2401", note: "Slate blue, slimmer bars" },
+  { id: "red-alert", name: "Red alert", era: "any", note: "Condition red; use setAlert()" },
+]);
 
 /* ── Pure helpers ─────────────────────────────────────────── */
 
@@ -85,6 +107,7 @@ const root = () => document.documentElement;
 export function setTheme(name, el = root()) {
   if (name) el.dataset.lcarsTheme = name;
   else delete el.dataset.lcarsTheme;
+  syncSelects();
   el.dispatchEvent(new CustomEvent("lcars:theme", { bubbles: true, detail: { theme: name || null } }));
 }
 
@@ -97,6 +120,7 @@ export function setAlert(on, el = root()) {
     el.dataset.lcarsPrevTheme = el.dataset.lcarsTheme ?? "";
     el.setAttribute("data-lcars-alert", "");
     el.dataset.lcarsTheme = "red-alert";
+    syncSelects();
   } else {
     el.removeAttribute("data-lcars-alert");
     setTheme(el.dataset.lcarsPrevTheme, el);
@@ -107,6 +131,25 @@ export function setAlert(on, el = root()) {
 }
 
 /* ── Live elements ────────────────────────────────────────── */
+
+const selects = new Set();
+
+function syncSelects() {
+  if (!hasDOM) return;
+  const current = document.documentElement.dataset.lcarsTheme || "tng";
+  for (const sel of selects) {
+    if (sel.isConnected) sel.value = current;
+    else selects.delete(sel);
+  }
+}
+
+function startThemeSelect(el) {
+  if (!el.options.length) {
+    for (const t of THEMES) el.add(new Option(`${t.id.toUpperCase()} · ${t.name}`, t.id));
+  }
+  selects.add(el);
+  syncSelects();
+}
 
 const clocks = new Set();
 let ticker = null;
@@ -185,6 +228,7 @@ const UPGRADES = [
   ["[data-lcars-clock], [data-lcars-stardate]", startClock],
   ["[data-lcars-cascade]", startCascade],
   [".lcars-meter[aria-valuenow]", watchMeter],
+  ["select[data-lcars-theme-select]", startThemeSelect],
 ];
 const upgraded = new WeakSet();
 
@@ -218,6 +262,16 @@ function onClick(event) {
   }
 }
 
+function onChange(event) {
+  const el = event.target;
+  if (!(el instanceof Element) || !el.matches("select[data-lcars-theme-select]")) return;
+  if (el.value === "red-alert") setAlert(true);
+  else {
+    setAlert(false);
+    setTheme(el.value === "tng" ? "" : el.value);
+  }
+}
+
 let listening = false;
 
 /**
@@ -228,6 +282,7 @@ export function init(scope = document) {
   if (!hasDOM) return;
   if (!listening) {
     document.addEventListener("click", onClick);
+    document.addEventListener("change", onChange);
     listening = true;
   }
   upgrade(scope);
@@ -246,6 +301,6 @@ if (hasDOM && !document.documentElement.hasAttribute("data-lcars-manual")) {
   else start();
 }
 
-const LCARS = { init, setTheme, setAlert, beep, stardate, clock, randomReadout };
+const LCARS = { init, setTheme, setAlert, beep, stardate, clock, randomReadout, THEMES };
 if (typeof window !== "undefined") window.LCARS ??= LCARS;
 export default LCARS;

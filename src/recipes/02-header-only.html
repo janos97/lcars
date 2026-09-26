@@ -1,0 +1,22 @@
+<!--
+title: Header only
+summary: A single header frame to put LCARS chrome above an existing (non-LCARS) app. Scope with class="lcars" on the header's wrapper if the rest of the page keeps its own styles.
+page: true
+-->
+<header class="lcars-frame" style="padding: 1rem">
+  <div class="lcars-frame__side">
+    <a class="lcars-block lcars-grow lcars-c-secondary" href="#">Home</a>
+  </div>
+  <div class="lcars-frame__main lcars-split">
+    <span class="lcars-label">Stardate <span data-lcars-stardate></span></span>
+    <h1 class="lcars-title" style="font-size: var(--lcars-text-2xl)">Console</h1>
+  </div>
+  <div class="lcars-frame__elbow-bottom lcars-c-secondary"></div>
+  <div class="lcars-frame__bar-bottom">
+    <span class="lcars-block lcars-grow-6 lcars-c-secondary"></span>
+    <span class="lcars-block lcars-c-primary lcars-round-end"></span>
+  </div>
+</header>
+<main style="padding: 1rem 2rem">
+  <p>Your existing application renders here.</p>
+</main>

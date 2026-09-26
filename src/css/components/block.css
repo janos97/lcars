@@ -61,10 +61,6 @@
   outline-offset: 2px;
 }
 
-:is(.lcars-block, .lcars-button):is([aria-current]:not([aria-current="false"]), [aria-pressed="true"], [aria-selected="true"], .is-active) {
-  --lcars-c: var(--lcars-active);
-}
-
 :is(.lcars-block, .lcars-button):is(:disabled, [aria-disabled="true"]) {
   cursor: not-allowed;
   filter: saturate(0.3) brightness(0.55);

@@ -60,7 +60,6 @@
 }
 
 .lcars-input:focus-visible {
-  --lcars-c: var(--lcars-accent);
   outline: none;
   box-shadow: 0 0 0 2px var(--lcars-bg), 0 0 0 4px var(--lcars-focus);
 }
@@ -141,10 +140,6 @@ select.lcars-input option {
 :is(.lcars-input, .lcars-check, .lcars-switch, .lcars-range):disabled {
   cursor: not-allowed;
   opacity: 0.45;
-}
-
-:is(.lcars-input, .lcars-check, .lcars-switch)[aria-invalid="true"] {
-  --lcars-c: var(--lcars-alert);
 }
 
 .lcars-choice {

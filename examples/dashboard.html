@@ -17,8 +17,8 @@
     <!-- ── Header ─────────────────────────────────────────── -->
     <header class="lcars-frame">
       <div class="lcars-frame__side">
-        <a class="lcars-block lcars-c-pink" href="index.html">← Library</a>
-        <div class="lcars-block lcars-grow lcars-c-pink">01-1701</div>
+        <a class="lcars-block lcars-c-secondary" href="index.html">← Library</a>
+        <div class="lcars-block lcars-grow lcars-c-secondary">01-1701</div>
       </div>
       <div class="lcars-frame__main lcars-split" style="align-items: flex-end">
         <dl class="lcars-readout" style="margin: 0; min-width: 12rem">
@@ -26,52 +26,55 @@
           <dt>Ship time</dt><dd data-lcars-clock></dd>
           <dt>Condition</dt><dd id="condition" class="lcars-text-green">Green</dd>
         </dl>
-        <h1 class="lcars-title">Operations</h1>
+        <div class="lcars-stack" style="--lcars-space: .5rem; align-items: flex-end">
+          <h1 class="lcars-title">Operations</h1>
+          <select class="lcars-input" data-lcars-theme-select aria-label="Theme" style="width: 17rem"></select>
+        </div>
       </div>
-      <div class="lcars-frame__elbow-bottom lcars-c-pink"></div>
+      <div class="lcars-frame__elbow-bottom lcars-c-secondary"></div>
       <div class="lcars-frame__bar-bottom">
-        <span class="lcars-block lcars-grow-3 lcars-c-pink"></span>
-        <span class="lcars-block lcars-c-sunflower"></span>
-        <span class="lcars-block lcars-grow-6 lcars-c-orange"></span>
-        <span class="lcars-block lcars-c-blue lcars-round-end" style="flex: 0 0 2.5rem"></span>
+        <span class="lcars-block lcars-grow-3 lcars-c-secondary"></span>
+        <span class="lcars-block lcars-c-accent"></span>
+        <span class="lcars-block lcars-grow-6 lcars-c-primary"></span>
+        <span class="lcars-block lcars-c-tertiary lcars-round-end" style="flex: 0 0 2.5rem"></span>
       </div>
     </header>
 
     <!-- ── Body ───────────────────────────────────────────── -->
     <div class="lcars-frame">
-      <div class="lcars-frame__elbow-top lcars-c-orange">Systems</div>
+      <div class="lcars-frame__elbow-top lcars-c-primary">Systems</div>
       <div class="lcars-frame__bar-top">
-        <span class="lcars-block lcars-c-orange"></span>
-        <span class="lcars-block lcars-grow-2 lcars-c-peach"></span>
-        <span class="lcars-block lcars-grow-8 lcars-c-orange"></span>
+        <span class="lcars-block lcars-c-primary"></span>
+        <span class="lcars-block lcars-grow-2 lcars-c-accent"></span>
+        <span class="lcars-block lcars-grow-8 lcars-c-primary"></span>
       </div>
 
       <nav class="lcars-frame__side" aria-label="Departments">
-        <a class="lcars-block lcars-c-sunflower" href="#" aria-current="page">Bridge</a>
-        <a class="lcars-block lcars-c-peach" href="#">Engineering</a>
-        <a class="lcars-block lcars-c-violet" href="#">Sciences</a>
-        <a class="lcars-block lcars-c-blue" href="#">Tactical</a>
-        <div class="lcars-block lcars-grow lcars-c-orange"></div>
+        <a class="lcars-block lcars-c-accent" href="#" aria-current="page">Bridge</a>
+        <a class="lcars-block lcars-c-accent" href="#">Engineering</a>
+        <a class="lcars-block lcars-c-secondary" href="#">Sciences</a>
+        <a class="lcars-block lcars-c-tertiary" href="#">Tactical</a>
+        <div class="lcars-block lcars-grow lcars-c-primary"></div>
         <button class="lcars-block lcars-block--tall lcars-c-tomato" data-lcars-toggle-alert data-lcars-tone="deny">Red alert</button>
       </nav>
 
       <main class="lcars-frame__main">
         <div class="lcars-grid" style="--lcars-grid-min: 19rem">
 
-          <section class="lcars-bracket lcars-c-violet" aria-labelledby="power-h">
+          <section class="lcars-bracket lcars-c-secondary" aria-labelledby="power-h">
             <h2 id="power-h" style="font-size: var(--lcars-text-xl)">Power distribution</h2>
             <div class="lcars-stack" style="--lcars-space: .75rem">
               <div>
                 <div class="lcars-split"><span class="lcars-label">Warp core</span><span class="lcars-num" data-out="warp"></span></div>
-                <div class="lcars-meter lcars-c-ice" role="meter" aria-label="Warp core" aria-valuemin="0" aria-valuemax="100" aria-valuenow="87" data-meter="warp"></div>
+                <div class="lcars-meter lcars-c-tertiary" role="meter" aria-label="Warp core" aria-valuemin="0" aria-valuemax="100" aria-valuenow="87" data-meter="warp"></div>
               </div>
               <div>
                 <div class="lcars-split"><span class="lcars-label">Impulse</span><span class="lcars-num" data-out="impulse"></span></div>
-                <div class="lcars-meter lcars-c-orange" role="meter" aria-label="Impulse" aria-valuemin="0" aria-valuemax="100" aria-valuenow="54" data-meter="impulse"></div>
+                <div class="lcars-meter lcars-c-primary" role="meter" aria-label="Impulse" aria-valuemin="0" aria-valuemax="100" aria-valuenow="54" data-meter="impulse"></div>
               </div>
               <div>
                 <div class="lcars-split"><span class="lcars-label">Shields</span><span class="lcars-num" data-out="shields"></span></div>
-                <div class="lcars-meter lcars-c-violet" role="meter" aria-label="Shields" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" data-meter="shields"></div>
+                <div class="lcars-meter lcars-c-secondary" role="meter" aria-label="Shields" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" data-meter="shields"></div>
               </div>
               <div>
                 <div class="lcars-split"><span class="lcars-label">Life support</span><span class="lcars-num" data-out="life"></span></div>
@@ -80,12 +83,12 @@
             </div>
           </section>
 
-          <section class="lcars-bracket lcars-c-sky" aria-labelledby="sensor-h">
+          <section class="lcars-bracket lcars-c-tertiary" aria-labelledby="sensor-h">
             <h2 id="sensor-h" style="font-size: var(--lcars-text-xl)">Sensor sweep</h2>
             <div class="lcars-data" data-lcars-cascade="60" style="--lcars-data-cols: 6"></div>
           </section>
 
-          <section class="lcars-bracket lcars-c-orange" aria-labelledby="nav-h">
+          <section class="lcars-bracket lcars-c-primary" aria-labelledby="nav-h">
             <h2 id="nav-h" style="font-size: var(--lcars-text-xl)">Navigation</h2>
             <form class="lcars-stack" style="--lcars-space: .75rem" onsubmit="event.preventDefault(); LCARS.beep('confirm')">
               <label class="lcars-field">
@@ -109,20 +112,20 @@
 
           <section class="lcars-span-all" aria-labelledby="crew-h">
             <div class="lcars-bar" style="margin-bottom: 1rem">
-              <span class="lcars-block lcars-round-start lcars-c-blue lcars-bar__fixed" style="width: 2.5rem"></span>
+              <span class="lcars-block lcars-round-start lcars-c-tertiary lcars-bar__fixed" style="width: 2.5rem"></span>
               <h2 id="crew-h" class="lcars-bar__title">Away team</h2>
-              <span class="lcars-block lcars-grow-6 lcars-c-blue"></span>
-              <span class="lcars-block lcars-c-violet lcars-round-end"></span>
+              <span class="lcars-block lcars-grow-6 lcars-c-tertiary"></span>
+              <span class="lcars-block lcars-c-secondary lcars-round-end"></span>
             </div>
-            <table class="lcars-table lcars-c-blue">
+            <table class="lcars-table lcars-c-tertiary">
               <thead>
                 <tr><th>Officer</th><th>Department</th><th>Location</th><th>Status</th><th class="lcars-num">Vitals</th></tr>
               </thead>
               <tbody>
                 <tr><td>Commander</td><td>Command</td><td>Planet surface</td><td><span class="lcars-pill lcars-c-green">Nominal</span></td><td class="lcars-num">98</td></tr>
                 <tr><td>Lt. Commander</td><td>Operations</td><td>Planet surface</td><td><span class="lcars-pill lcars-c-green">Nominal</span></td><td class="lcars-num">100</td></tr>
-                <tr><td>Lieutenant</td><td>Security</td><td>Cave system</td><td><span class="lcars-pill lcars-c-gold">No contact</span></td><td class="lcars-num">—</td></tr>
-                <tr><td>Doctor</td><td>Medical</td><td>Transporter room 3</td><td><span class="lcars-pill lcars-pill--outline lcars-c-sunflower">Standby</span></td><td class="lcars-num">97</td></tr>
+                <tr><td>Lieutenant</td><td>Security</td><td>Cave system</td><td><span class="lcars-pill lcars-c-accent">No contact</span></td><td class="lcars-num">—</td></tr>
+                <tr><td>Doctor</td><td>Medical</td><td>Transporter room 3</td><td><span class="lcars-pill lcars-pill--outline lcars-c-accent">Standby</span></td><td class="lcars-num">97</td></tr>
               </tbody>
             </table>
           </section>
@@ -130,11 +133,11 @@
         </div>
       </main>
 
-      <div class="lcars-frame__elbow-bottom lcars-c-blue">47</div>
+      <div class="lcars-frame__elbow-bottom lcars-c-tertiary">47</div>
       <div class="lcars-frame__bar-bottom">
-        <span class="lcars-block lcars-grow-4 lcars-c-blue"></span>
-        <span class="lcars-block lcars-c-sky"></span>
-        <span class="lcars-block lcars-grow-2 lcars-c-blue lcars-round-end"></span>
+        <span class="lcars-block lcars-grow-4 lcars-c-tertiary"></span>
+        <span class="lcars-block lcars-c-tertiary"></span>
+        <span class="lcars-block lcars-grow-2 lcars-c-tertiary lcars-round-end"></span>
       </div>
     </div>
 

@@ -1,28 +1,142 @@
 /*
- * Themes remap the semantic roles. Apply with data-lcars-theme="…" on <html>
- * or on any element to theme just that subtree. The default (no attribute)
- * is "classic".
+ * Themes — one per Star Trek series/era, plus red alert.
  *
- * To add your own theme, copy one block and change the values — every theme
- * must define the same role variables (test/tokens.test.mjs checks this).
+ * Apply with data-lcars-theme="<id>" on <html> or on any element to theme
+ * just that subtree. No attribute = "tng".
+ *
+ * Every theme MUST define the role variables below (test/tokens.test.mjs
+ * checks this). A theme MAY also retune geometry tokens (--lcars-bar,
+ * --lcars-gap, --lcars-inner-radius, --lcars-elbow-rx, --lcars-case, …)
+ * to echo the shape language of its era.
+ *
+ * Colors are fan interpretations chosen for black text on colored pieces
+ * (WCAG AA for the UI sizes used), not screen-accurate reproductions.
+ * Pre-LCARS eras (TOS, ENT, DIS, SNW) translate their console styling into
+ * the LCARS vocabulary.
  */
 
-/* The Next Generation — orange, violet, periwinkle. */
-[data-lcars-theme="classic"] {
-  --lcars-fg: var(--lcars-sunflower);
-  --lcars-primary: var(--lcars-orange);
-  --lcars-secondary: var(--lcars-violet);
-  --lcars-tertiary: var(--lcars-blue);
-  --lcars-accent: var(--lcars-butterscotch);
-  --lcars-muted: var(--lcars-gray);
-  --lcars-alert: var(--lcars-tomato);
-  --lcars-active: var(--lcars-white);
-  --lcars-heading: var(--lcars-orange);
-  --lcars-link: var(--lcars-ice);
+/* TNG — The Next Generation (2364–2370). The canonical LCARS look:
+ * orange, violet and periwinkle on black. The defaults in tokens.css
+ * match this theme; the block lets a subtree switch back to it. */
+[data-lcars-theme="tng"] {
+  --lcars-bg: #000;
+  --lcars-fg: #ffcc99;
+  --lcars-primary: #ff9900;
+  --lcars-secondary: #cc99ff;
+  --lcars-tertiary: #9999ff;
+  --lcars-accent: #ff9966;
+  --lcars-muted: #8a8aa6;
+  --lcars-alert: #ff5555;
+  --lcars-active: #f5f6fa;
+  --lcars-heading: #ff9900;
+  --lcars-link: #99ccff;
 }
 
-/* Nemesis-era blues and greys. */
+/* TOS — The Original Series (2265–2269). Pre-LCARS: command gold, science
+ * blue, operations red and blinking console lamps; squarer shapes. */
+[data-lcars-theme="tos"] {
+  --lcars-bg: #000;
+  --lcars-fg: #f3ecd2;
+  --lcars-primary: #f2c33a;
+  --lcars-secondary: #6fa8ff;
+  --lcars-tertiary: #e8503a;
+  --lcars-accent: #7fd67a;
+  --lcars-muted: #8a8f99;
+  --lcars-alert: #ff3333;
+  --lcars-active: #ffffff;
+  --lcars-heading: #f2c33a;
+  --lcars-link: #6fa8ff;
+  --lcars-inner-radius: 0.75rem;
+  --lcars-elbow-rx: 40%;
+}
+
+/* SNW — Strange New Worlds (2259–). Retro-modern take on the TOS bridge:
+ * warm gold, teal and signal red. */
+[data-lcars-theme="snw"] {
+  --lcars-bg: #000;
+  --lcars-fg: #f4ecd8;
+  --lcars-primary: #f0b43c;
+  --lcars-secondary: #4fc3c8;
+  --lcars-tertiary: #e25a4a;
+  --lcars-accent: #9ec9ff;
+  --lcars-muted: #7f8791;
+  --lcars-alert: #ff3b30;
+  --lcars-active: #ffffff;
+  --lcars-heading: #f0b43c;
+  --lcars-link: #9ec9ff;
+}
+
+/* DIS — Discovery (2256–3191). Holographic silver-blue with Starfleet
+ * delta gold; thin bars and airy gaps. */
+[data-lcars-theme="dis"] {
+  --lcars-bg: #000;
+  --lcars-fg: #e3eef8;
+  --lcars-primary: #6ec1ff;
+  --lcars-secondary: #c7d3e0;
+  --lcars-tertiary: #4f9be6;
+  --lcars-accent: #e6b450;
+  --lcars-muted: #6d7b8c;
+  --lcars-alert: #ff4438;
+  --lcars-active: #ffffff;
+  --lcars-heading: #6ec1ff;
+  --lcars-link: #e6b450;
+  --lcars-bar: 0.875rem;
+  --lcars-gap: 0.375rem;
+}
+
+/* ENT — Enterprise (2151–2155). NX-era gunmetal, steel blue and amber;
+ * utilitarian, nearly square corners. */
+[data-lcars-theme="ent"] {
+  --lcars-bg: #000;
+  --lcars-fg: #dfe6ee;
+  --lcars-primary: #8fa6c4;
+  --lcars-secondary: #c9ced6;
+  --lcars-tertiary: #7a9cc9;
+  --lcars-accent: #f0a040;
+  --lcars-muted: #6f7680;
+  --lcars-alert: #ff5a3c;
+  --lcars-active: #ffffff;
+  --lcars-heading: #c9ced6;
+  --lcars-link: #f0a040;
+  --lcars-inner-radius: 0.5rem;
+  --lcars-elbow-rx: 25%;
+}
+
+/* DS9 — Deep Space Nine (2369–2375). Starfleet LCARS aboard the station
+ * and Defiant: rust, tan and dusty lavender. */
+[data-lcars-theme="ds9"] {
+  --lcars-bg: #000;
+  --lcars-fg: #f3d9b8;
+  --lcars-primary: #dd9955;
+  --lcars-secondary: #b39acc;
+  --lcars-tertiary: #cc6666;
+  --lcars-accent: #f1c28a;
+  --lcars-muted: #8c7f7a;
+  --lcars-alert: #ff4f4f;
+  --lcars-active: #ffffff;
+  --lcars-heading: #dd9955;
+  --lcars-link: #b39acc;
+}
+
+/* VOY — Voyager (2371–2378). Peach and gold with cooler blue-lilac. */
+[data-lcars-theme="voy"] {
+  --lcars-bg: #000;
+  --lcars-fg: #ffe0cc;
+  --lcars-primary: #ffaa77;
+  --lcars-secondary: #99aaff;
+  --lcars-tertiary: #cc99cc;
+  --lcars-accent: #ffcc66;
+  --lcars-muted: #7788aa;
+  --lcars-alert: #ff5544;
+  --lcars-active: #ffffff;
+  --lcars-heading: #99aaff;
+  --lcars-link: #ffcc66;
+}
+
+/* NEMESIS — the TNG films, First Contact to Nemesis (2373–2379).
+ * Sovereign-class blues and greys. */
 [data-lcars-theme="nemesis"] {
+  --lcars-bg: #000;
   --lcars-fg: #ccddff;
   --lcars-primary: #7799ee;
   --lcars-secondary: #99ccff;
@@ -35,8 +149,9 @@
   --lcars-link: #ffcc88;
 }
 
-/* Brighter, higher-contrast late-24th-century palette. */
-[data-lcars-theme="lower-decks"] {
+/* LD — Lower Decks (2380–). Brighter, higher-contrast late-LCARS. */
+[data-lcars-theme="ld"] {
+  --lcars-bg: #000;
   --lcars-fg: #ffe6c7;
   --lcars-primary: #ff7700;
   --lcars-secondary: #ffcc33;
@@ -49,9 +164,43 @@
   --lcars-link: #9ea5ff;
 }
 
-/* Condition red. Unlike the other themes it also remaps the named swatches,
- * so the whole display turns red. Pair with data-lcars-alert to pulse the
- * frame (lcars.js setAlert() does both). */
+/* PRO — Prodigy (2383–). The Protostar's vivid violet, teal and orange. */
+[data-lcars-theme="pro"] {
+  --lcars-bg: #000;
+  --lcars-fg: #e9e2ff;
+  --lcars-primary: #9b7bff;
+  --lcars-secondary: #33d1c6;
+  --lcars-tertiary: #ff8a3d;
+  --lcars-accent: #ffd24d;
+  --lcars-muted: #7a7497;
+  --lcars-alert: #ff4d6d;
+  --lcars-active: #ffffff;
+  --lcars-heading: #33d1c6;
+  --lcars-link: #ffd24d;
+}
+
+/* PIC — Picard (2399–2401). Muted slate blue with teal and amber; slimmer
+ * bars and softer curves. */
+[data-lcars-theme="pic"] {
+  --lcars-bg: #000;
+  --lcars-fg: #d8e4f0;
+  --lcars-primary: #7fa7d6;
+  --lcars-secondary: #a9c4e0;
+  --lcars-tertiary: #5fc0c0;
+  --lcars-accent: #e8a860;
+  --lcars-muted: #6b7a8c;
+  --lcars-alert: #ff5050;
+  --lcars-active: #ffffff;
+  --lcars-heading: #a9c4e0;
+  --lcars-link: #5fc0c0;
+  --lcars-bar: 1rem;
+  --lcars-inner-radius: 1rem;
+}
+
+/* RED ALERT — not a series: condition red for any theme. Unlike the other
+ * themes it also remaps the named swatches, so the whole display turns
+ * red. Pair with data-lcars-alert to pulse the frame (lcars.js setAlert()
+ * does both and restores the previous theme afterwards). */
 [data-lcars-theme="red-alert"] {
   --lcars-orange: #ff4433;
   --lcars-gold: #ff5544;
@@ -72,6 +221,7 @@
   --lcars-tomato: #ff5555;
   --lcars-gray: #aa6666;
 
+  --lcars-bg: #000;
   --lcars-fg: #ffc9c0;
   --lcars-primary: #ff4433;
   --lcars-secondary: #ff8877;

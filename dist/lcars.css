@@ -58,20 +58,112 @@
     --lcars-duration: .14s;
   }
 
-  [data-lcars-theme="classic"] {
-    --lcars-fg: var(--lcars-sunflower);
-    --lcars-primary: var(--lcars-orange);
-    --lcars-secondary: var(--lcars-violet);
-    --lcars-tertiary: var(--lcars-blue);
-    --lcars-accent: var(--lcars-butterscotch);
-    --lcars-muted: var(--lcars-gray);
-    --lcars-alert: var(--lcars-tomato);
-    --lcars-active: var(--lcars-white);
-    --lcars-heading: var(--lcars-orange);
-    --lcars-link: var(--lcars-ice);
+  [data-lcars-theme="tng"] {
+    --lcars-bg: #000;
+    --lcars-fg: #fc9;
+    --lcars-primary: #f90;
+    --lcars-secondary: #c9f;
+    --lcars-tertiary: #99f;
+    --lcars-accent: #f96;
+    --lcars-muted: #8a8aa6;
+    --lcars-alert: #f55;
+    --lcars-active: #f5f6fa;
+    --lcars-heading: #f90;
+    --lcars-link: #9cf;
+  }
+
+  [data-lcars-theme="tos"] {
+    --lcars-bg: #000;
+    --lcars-fg: #f3ecd2;
+    --lcars-primary: #f2c33a;
+    --lcars-secondary: #6fa8ff;
+    --lcars-tertiary: #e8503a;
+    --lcars-accent: #7fd67a;
+    --lcars-muted: #8a8f99;
+    --lcars-alert: #f33;
+    --lcars-active: #fff;
+    --lcars-heading: #f2c33a;
+    --lcars-link: #6fa8ff;
+    --lcars-inner-radius: .75rem;
+    --lcars-elbow-rx: 40%;
+  }
+
+  [data-lcars-theme="snw"] {
+    --lcars-bg: #000;
+    --lcars-fg: #f4ecd8;
+    --lcars-primary: #f0b43c;
+    --lcars-secondary: #4fc3c8;
+    --lcars-tertiary: #e25a4a;
+    --lcars-accent: #9ec9ff;
+    --lcars-muted: #7f8791;
+    --lcars-alert: #ff3b30;
+    --lcars-active: #fff;
+    --lcars-heading: #f0b43c;
+    --lcars-link: #9ec9ff;
+  }
+
+  [data-lcars-theme="dis"] {
+    --lcars-bg: #000;
+    --lcars-fg: #e3eef8;
+    --lcars-primary: #6ec1ff;
+    --lcars-secondary: #c7d3e0;
+    --lcars-tertiary: #4f9be6;
+    --lcars-accent: #e6b450;
+    --lcars-muted: #6d7b8c;
+    --lcars-alert: #ff4438;
+    --lcars-active: #fff;
+    --lcars-heading: #6ec1ff;
+    --lcars-link: #e6b450;
+    --lcars-bar: .875rem;
+    --lcars-gap: .375rem;
+  }
+
+  [data-lcars-theme="ent"] {
+    --lcars-bg: #000;
+    --lcars-fg: #dfe6ee;
+    --lcars-primary: #8fa6c4;
+    --lcars-secondary: #c9ced6;
+    --lcars-tertiary: #7a9cc9;
+    --lcars-accent: #f0a040;
+    --lcars-muted: #6f7680;
+    --lcars-alert: #ff5a3c;
+    --lcars-active: #fff;
+    --lcars-heading: #c9ced6;
+    --lcars-link: #f0a040;
+    --lcars-inner-radius: .5rem;
+    --lcars-elbow-rx: 25%;
+  }
+
+  [data-lcars-theme="ds9"] {
+    --lcars-bg: #000;
+    --lcars-fg: #f3d9b8;
+    --lcars-primary: #d95;
+    --lcars-secondary: #b39acc;
+    --lcars-tertiary: #c66;
+    --lcars-accent: #f1c28a;
+    --lcars-muted: #8c7f7a;
+    --lcars-alert: #ff4f4f;
+    --lcars-active: #fff;
+    --lcars-heading: #d95;
+    --lcars-link: #b39acc;
+  }
+
+  [data-lcars-theme="voy"] {
+    --lcars-bg: #000;
+    --lcars-fg: #ffe0cc;
+    --lcars-primary: #fa7;
+    --lcars-secondary: #9af;
+    --lcars-tertiary: #c9c;
+    --lcars-accent: #fc6;
+    --lcars-muted: #78a;
+    --lcars-alert: #f54;
+    --lcars-active: #fff;
+    --lcars-heading: #9af;
+    --lcars-link: #fc6;
   }
 
   [data-lcars-theme="nemesis"] {
+    --lcars-bg: #000;
     --lcars-fg: #cdf;
     --lcars-primary: #79e;
     --lcars-secondary: #9cf;
@@ -84,7 +176,8 @@
     --lcars-link: #fc8;
   }
 
-  [data-lcars-theme="lower-decks"] {
+  [data-lcars-theme="ld"] {
+    --lcars-bg: #000;
     --lcars-fg: #ffe6c7;
     --lcars-primary: #f70;
     --lcars-secondary: #fc3;
@@ -95,6 +188,36 @@
     --lcars-active: #fff;
     --lcars-heading: #fc3;
     --lcars-link: #9ea5ff;
+  }
+
+  [data-lcars-theme="pro"] {
+    --lcars-bg: #000;
+    --lcars-fg: #e9e2ff;
+    --lcars-primary: #9b7bff;
+    --lcars-secondary: #33d1c6;
+    --lcars-tertiary: #ff8a3d;
+    --lcars-accent: #ffd24d;
+    --lcars-muted: #7a7497;
+    --lcars-alert: #ff4d6d;
+    --lcars-active: #fff;
+    --lcars-heading: #33d1c6;
+    --lcars-link: #ffd24d;
+  }
+
+  [data-lcars-theme="pic"] {
+    --lcars-bg: #000;
+    --lcars-fg: #d8e4f0;
+    --lcars-primary: #7fa7d6;
+    --lcars-secondary: #a9c4e0;
+    --lcars-tertiary: #5fc0c0;
+    --lcars-accent: #e8a860;
+    --lcars-muted: #6b7a8c;
+    --lcars-alert: #ff5050;
+    --lcars-active: #fff;
+    --lcars-heading: #a9c4e0;
+    --lcars-link: #5fc0c0;
+    --lcars-bar: 1rem;
+    --lcars-inner-radius: 1rem;
   }
 
   [data-lcars-theme="red-alert"] {
@@ -116,6 +239,7 @@
     --lcars-mars: #f20;
     --lcars-tomato: #f55;
     --lcars-gray: #a66;
+    --lcars-bg: #000;
     --lcars-fg: #ffc9c0;
     --lcars-primary: #f43;
     --lcars-secondary: #f87;
@@ -528,10 +652,6 @@
   :is(a, button, label).lcars-block:focus-visible, .lcars-button:focus-visible {
     outline: 2px solid var(--lcars-focus);
     outline-offset: 2px;
-  }
-
-  :is(.lcars-block, .lcars-button):is([aria-current]:not([aria-current="false"]), [aria-pressed="true"], [aria-selected="true"], .is-active) {
-    --lcars-c: var(--lcars-active);
   }
 
   :is(.lcars-block, .lcars-button):is(:disabled, [aria-disabled="true"]) {
@@ -965,7 +1085,6 @@
   }
 
   .lcars-input:focus-visible {
-    --lcars-c: var(--lcars-accent);
     box-shadow: 0 0 0 2px var(--lcars-bg), 0 0 0 4px var(--lcars-focus);
     outline: none;
   }
@@ -1040,10 +1159,6 @@
     opacity: .45;
   }
 
-  :is(.lcars-input, .lcars-check, .lcars-switch)[aria-invalid="true"] {
-    --lcars-c: var(--lcars-alert);
-  }
-
   .lcars-choice {
     font-family: var(--lcars-font);
     text-transform: var(--lcars-case);
@@ -1099,6 +1214,21 @@
     box-shadow: 0 0 0 3px var(--lcars-bg);
     border: 0;
     border-radius: .2rem;
+  }
+
+  .lcars-dialog {
+    width: min(var(--lcars-dialog-width, 40rem), 100% - 2rem);
+    max-height: calc(100% - 2rem);
+    padding: var(--lcars-space);
+    background-color: var(--lcars-bg);
+    color: var(--lcars-fg);
+    font-family: var(--lcars-font);
+    letter-spacing: var(--lcars-tracking);
+    border: 0;
+  }
+
+  .lcars-dialog::backdrop {
+    background-color: #000c;
   }
 }
 
@@ -1403,6 +1533,18 @@
     padding: 0;
     position: absolute;
     overflow: hidden;
+  }
+
+  :is(.lcars-block, .lcars-button):is([aria-current]:not([aria-current="false"]), [aria-pressed="true"], [aria-selected="true"], .is-active) {
+    --lcars-c: var(--lcars-active);
+  }
+
+  .lcars-input:focus-visible {
+    --lcars-c: var(--lcars-accent);
+  }
+
+  :is(.lcars-input, .lcars-check, .lcars-switch)[aria-invalid="true"] {
+    --lcars-c: var(--lcars-alert);
   }
 }
 

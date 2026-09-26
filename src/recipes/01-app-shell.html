@@ -1,0 +1,40 @@
+<!--
+title: App shell
+summary: Full-page layout — header frame + body frame with sidebar navigation. Start every LCARS app from this.
+page: true
+-->
+<div class="lcars-app">
+  <header class="lcars-frame">
+    <div class="lcars-frame__side">
+      <div class="lcars-block lcars-grow lcars-c-secondary">01-1701</div>
+    </div>
+    <div class="lcars-frame__main">
+      <h1 class="lcars-title">App name</h1>
+    </div>
+    <div class="lcars-frame__elbow-bottom lcars-c-secondary"></div>
+    <div class="lcars-frame__bar-bottom">
+      <span class="lcars-block lcars-grow-4 lcars-c-secondary"></span>
+      <span class="lcars-block lcars-c-primary"></span>
+      <span class="lcars-block lcars-grow-2 lcars-c-tertiary lcars-round-end"></span>
+    </div>
+  </header>
+
+  <div class="lcars-frame">
+    <div class="lcars-frame__elbow-top"></div>
+    <div class="lcars-frame__bar-top">
+      <span class="lcars-block lcars-grow-2"></span>
+      <span class="lcars-block lcars-c-accent"></span>
+      <span class="lcars-block lcars-grow-6"></span>
+    </div>
+    <nav class="lcars-frame__side" aria-label="Main">
+      <a class="lcars-block lcars-c-accent" href="#" aria-current="page">Overview</a>
+      <a class="lcars-block lcars-c-tertiary" href="#">Reports</a>
+      <a class="lcars-block lcars-c-secondary" href="#">Settings</a>
+      <div class="lcars-block lcars-grow"></div>
+    </nav>
+    <main class="lcars-frame__main">
+      <h2>Overview</h2>
+      <p>Page content goes here.</p>
+    </main>
+  </div>
+</div>

@@ -13,16 +13,27 @@ test("every palette swatch has .lcars-c-* and .lcars-text-* utilities", () => {
   }
 });
 
-test("every theme defines the same semantic roles", () => {
+test("every theme defines at least the roles the default theme defines", () => {
   const themes = read("src", "css", "themes.css");
   const blocks = [...themes.matchAll(/\[data-lcars-theme="([^"]+)"\]\s*\{([^}]*)\}/g)];
-  assert.ok(blocks.length >= 4, "themes parsed");
-  const palette = new Set(paletteNames());
-  const roles = (body) => [...body.matchAll(/--lcars-([a-z-]+):/g)].map((m) => m[1]).filter((n) => !palette.has(n)).sort();
-  const [, firstName, firstBody] = blocks[0];
-  for (const [, name, body] of blocks.slice(1)) {
-    assert.deepEqual(roles(body), roles(firstBody), `theme "${name}" vs "${firstName}"`);
+  assert.ok(blocks.length >= 10, "themes parsed");
+  const vars = (body) => new Set([...body.matchAll(/--lcars-([a-z0-9-]+):/g)].map((m) => m[1]));
+  const tng = blocks.find(([, name]) => name === "tng");
+  assert.ok(tng, "tng theme exists");
+  const required = [...vars(tng[2])];
+  assert.ok(required.includes("primary") && required.includes("bg"), "tng defines roles");
+  for (const [, name, body] of blocks) {
+    const have = vars(body);
+    const missing = required.filter((v) => !have.has(v));
+    assert.deepEqual(missing, [], `theme "${name}" is missing roles`);
   }
+});
+
+test("lcars.js THEMES matches the themes in themes.css", async () => {
+  const { THEMES } = await import("../src/js/lcars.js");
+  const css = read("src", "css", "themes.css");
+  const inCss = [...css.matchAll(/\[data-lcars-theme="([^"]+)"\]\s*\{/g)].map((m) => m[1]);
+  assert.deepEqual(THEMES.map((t) => t.id), inCss);
 });
 
 test("every var(--lcars-*) without a fallback is defined somewhere", () => {

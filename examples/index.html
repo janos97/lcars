@@ -22,53 +22,55 @@
 
     <header class="lcars-frame">
       <div class="lcars-frame__side">
-        <div class="lcars-block lcars-c-violet">v1.0</div>
-        <a class="lcars-block lcars-grow lcars-c-violet" href="https://github.com/janos97/lcars">Source</a>
+        <div class="lcars-block lcars-c-secondary">v1.0</div>
+        <a class="lcars-block lcars-grow lcars-c-secondary" href="https://github.com/janos97/lcars">Source</a>
       </div>
       <div class="lcars-frame__main lcars-stack">
         <h1 class="lcars-title">LCARS Component Library</h1>
         <div class="lcars-split">
-          <div class="lcars-cluster" role="group" aria-label="Theme">
-            <span class="lcars-label">Theme</span>
-            <button class="lcars-button lcars-button--sm" data-lcars-set-theme="">Classic</button>
-            <button class="lcars-button lcars-button--sm lcars-c-ice" data-lcars-set-theme="nemesis">Nemesis</button>
-            <button class="lcars-button lcars-button--sm lcars-c-gold" data-lcars-set-theme="lower-decks">Lower Decks</button>
-            <button class="lcars-button lcars-button--sm lcars-c-tomato" data-lcars-toggle-alert data-lcars-tone="deny">Red alert</button>
+          <div class="lcars-cluster">
+            <label class="lcars-field" style="min-width: 16rem">
+              <span class="lcars-label">Theme</span>
+              <select class="lcars-input" data-lcars-theme-select></select>
+            </label>
+            <button class="lcars-button lcars-c-tomato" data-lcars-toggle-alert data-lcars-tone="deny" style="align-self: flex-end">Red alert</button>
           </div>
           <p class="lcars-label lcars-text-fg" style="margin:0">Stardate <span data-lcars-stardate></span> · <span data-lcars-clock></span></p>
         </div>
       </div>
-      <div class="lcars-frame__elbow-bottom lcars-c-violet"></div>
+      <div class="lcars-frame__elbow-bottom lcars-c-secondary"></div>
       <div class="lcars-frame__bar-bottom">
-        <span class="lcars-block lcars-grow-6 lcars-c-violet"></span>
-        <span class="lcars-block lcars-c-orange"></span>
-        <span class="lcars-block lcars-grow-2 lcars-c-sky"></span>
-        <span class="lcars-block lcars-c-peach lcars-round-end" style="flex: 0 0 3rem"></span>
+        <span class="lcars-block lcars-grow-6 lcars-c-secondary"></span>
+        <span class="lcars-block lcars-c-primary"></span>
+        <span class="lcars-block lcars-grow-2 lcars-c-tertiary"></span>
+        <span class="lcars-block lcars-c-accent lcars-round-end" style="flex: 0 0 3rem"></span>
       </div>
     </header>
 
     <div class="lcars-frame">
-      <div class="lcars-frame__elbow-top lcars-c-orange">Index</div>
+      <div class="lcars-frame__elbow-top lcars-c-primary">Index</div>
       <div class="lcars-frame__bar-top">
-        <span class="lcars-block lcars-grow-2 lcars-c-orange"></span>
-        <span class="lcars-block lcars-c-sunflower"></span>
-        <span class="lcars-block lcars-grow-8 lcars-c-orange"></span>
+        <span class="lcars-block lcars-grow-2 lcars-c-primary"></span>
+        <span class="lcars-block lcars-c-accent"></span>
+        <span class="lcars-block lcars-grow-8 lcars-c-primary"></span>
       </div>
       <nav class="lcars-frame__side" aria-label="Sections">
-        <a class="lcars-block lcars-block--short lcars-c-sunflower" href="#palette">Palette</a>
-        <a class="lcars-block lcars-block--short lcars-c-peach" href="#frame">Frame</a>
-        <a class="lcars-block lcars-block--short lcars-c-blue" href="#blocks-bars">Blocks &amp; bars</a>
-        <a class="lcars-block lcars-block--short lcars-c-violet" href="#buttons">Buttons</a>
-        <a class="lcars-block lcars-block--short lcars-c-sunflower" href="#typography">Typography</a>
-        <a class="lcars-block lcars-block--short lcars-c-orange" href="#brackets">Brackets</a>
-        <a class="lcars-block lcars-block--short lcars-c-sky" href="#meters">Meters</a>
-        <a class="lcars-block lcars-block--short lcars-c-peach" href="#data">Data</a>
-        <a class="lcars-block lcars-block--short lcars-c-pink" href="#tables">Tables</a>
-        <a class="lcars-block lcars-block--short lcars-c-blue" href="#forms">Forms</a>
-        <a class="lcars-block lcars-block--short lcars-c-gold" href="#layout">Layout</a>
-        <a class="lcars-block lcars-block--short lcars-c-violet" href="#javascript">JavaScript</a>
-        <a class="lcars-block lcars-block--short lcars-c-ice" href="dashboard.html">Dashboard →</a>
-        <div class="lcars-block lcars-grow lcars-c-orange"></div>
+        <a class="lcars-block lcars-block--short lcars-c-accent" href="#palette">Palette</a>
+        <a class="lcars-block lcars-block--short lcars-c-secondary" href="#themes">Themes</a>
+        <a class="lcars-block lcars-block--short lcars-c-accent" href="#frame">Frame</a>
+        <a class="lcars-block lcars-block--short lcars-c-tertiary" href="#blocks-bars">Blocks &amp; bars</a>
+        <a class="lcars-block lcars-block--short lcars-c-secondary" href="#buttons">Buttons</a>
+        <a class="lcars-block lcars-block--short lcars-c-accent" href="#typography">Typography</a>
+        <a class="lcars-block lcars-block--short lcars-c-primary" href="#brackets">Brackets</a>
+        <a class="lcars-block lcars-block--short lcars-c-tertiary" href="#meters">Meters</a>
+        <a class="lcars-block lcars-block--short lcars-c-accent" href="#data">Data</a>
+        <a class="lcars-block lcars-block--short lcars-c-secondary" href="#tables">Tables</a>
+        <a class="lcars-block lcars-block--short lcars-c-tertiary" href="#forms">Forms</a>
+        <a class="lcars-block lcars-block--short lcars-c-accent" href="#layout">Layout</a>
+        <a class="lcars-block lcars-block--short lcars-c-secondary" href="#javascript">JavaScript</a>
+        <a class="lcars-block lcars-block--short lcars-c-tertiary" href="dashboard.html">Dashboard →</a>
+        <a class="lcars-block lcars-block--short lcars-c-accent" href="recipes/">Recipes →</a>
+        <div class="lcars-block lcars-grow lcars-c-primary"></div>
       </nav>
 
       <main class="lcars-frame__main">
@@ -89,6 +91,13 @@
           </div>
           <h3 style="margin-top: 1.5rem">Swatches</h3>
           <div class="lcars-grid" id="swatches" style="--lcars-grid-min: 8rem; --lcars-space: var(--lcars-gap)"></div>
+        </section>
+
+        <!-- ── Themes ────────────────────────────────────── -->
+        <section id="themes">
+          <h2>Themes</h2>
+          <p>One theme per series, from Enterprise to Picard, plus red alert. Apply <code>data-lcars-theme="…"</code> to <code>&lt;html&gt;</code> or to any element — each preview below is scoped that way. Some themes also retune geometry (bar thickness, corner radii) to match their era.</p>
+          <div class="lcars-grid" id="theme-previews" style="--lcars-grid-min: 17rem"></div>
         </section>
 
         <!-- ── Frame ─────────────────────────────────────── -->
@@ -342,12 +351,13 @@
 <pre><code>&lt;span data-lcars-clock&gt;&lt;/span&gt;            live clock ("hm" hides seconds)
 &lt;span data-lcars-stardate&gt;&lt;/span&gt;         stardate, YYYY.DDD
 &lt;div class="lcars-data" data-lcars-cascade="48"&gt;&lt;/div&gt;
-&lt;button data-lcars-set-theme="nemesis"&gt;    switch theme ("" = default)
+&lt;button data-lcars-set-theme="ds9"&gt;        switch theme ("" = default)
+&lt;select data-lcars-theme-select&gt;          theme picker, fills itself with every theme
 &lt;button data-lcars-toggle-alert&gt;           red alert on/off
 &lt;body data-lcars-sound&gt;                   beep on clicks (tap | confirm | deny)
 
 import LCARS from "lcars";                 // or "./dist/lcars.js"
-LCARS.setTheme("nemesis");
+LCARS.setTheme("voy");                    // ids: LCARS.THEMES.map(t =&gt; t.id)
 LCARS.setAlert(true);
 LCARS.beep("confirm");
 LCARS.init(element);                       // upgrade content you rendered yourself</code></pre>
@@ -357,6 +367,34 @@ LCARS.init(element);                       // upgrade content you rendered yours
     </div>
   </div>
 
+  <script type="module">
+    // Theme previews: one scoped mini-frame per theme.
+    import { THEMES } from "../dist/lcars.js";
+    document.getElementById("theme-previews").innerHTML = THEMES.map((t) => `
+      <div data-lcars-theme="${t.id}" style="background: var(--lcars-bg); color: var(--lcars-fg)">
+        <div class="lcars-frame">
+          <div class="lcars-frame__elbow-top">${t.id}</div>
+          <div class="lcars-frame__bar-top">
+            <span class="lcars-block lcars-c-primary lcars-grow-3"></span>
+            <span class="lcars-block lcars-c-secondary"></span>
+            <span class="lcars-block lcars-c-tertiary lcars-round-end"></span>
+          </div>
+          <div class="lcars-frame__side">
+            <div class="lcars-block lcars-block--short lcars-c-secondary">${t.era}</div>
+            <div class="lcars-block lcars-grow lcars-c-tertiary"></div>
+          </div>
+          <div class="lcars-frame__main lcars-stack" style="--lcars-space: .5rem">
+            <h3 style="margin: 0">${t.name}</h3>
+            <span class="lcars-label">${t.note}</span>
+            <div class="lcars-meter" style="--lcars-value: .7"></div>
+            <div class="lcars-cluster">
+              <span class="lcars-pill lcars-c-accent">Accent</span>
+              <span class="lcars-pill lcars-c-alert">Alert</span>
+            </div>
+          </div>
+        </div>
+      </div>`).join("");
+  </script>
   <script>
     // Gallery helpers: render swatches from the palette and show each demo's source.
     (() => {

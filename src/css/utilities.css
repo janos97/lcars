@@ -116,3 +116,18 @@
   white-space: nowrap;
   border: 0;
 }
+
+/* ── States ──
+ * Declared last so they beat .lcars-c-* on the same element: an active
+ * nav item or an invalid field must look active/invalid whatever its color. */
+:is(.lcars-block, .lcars-button):is([aria-current]:not([aria-current="false"]), [aria-pressed="true"], [aria-selected="true"], .is-active) {
+  --lcars-c: var(--lcars-active);
+}
+
+.lcars-input:focus-visible {
+  --lcars-c: var(--lcars-accent);
+}
+
+:is(.lcars-input, .lcars-check, .lcars-switch)[aria-invalid="true"] {
+  --lcars-c: var(--lcars-alert);
+}
