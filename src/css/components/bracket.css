@@ -1,0 +1,47 @@
+/*
+ * .lcars-bracket — rounded [ ] brackets around a piece of content; the
+ * LCARS take on a card/panel.
+ *
+ *   <section class="lcars-bracket lcars-c-ice">…</section>
+ *
+ * --start / --end draw only one side. Thickness and arm length are
+ * controlled by --lcars-bracket-width and --lcars-bracket-arm.
+ */
+
+.lcars-bracket {
+  --lcars-c: var(--lcars-secondary);
+  --_w: var(--lcars-bracket-width, 0.75rem);
+  --_arm: var(--lcars-bracket-arm, 2rem);
+  position: relative;
+  min-width: 0;
+  padding: calc(var(--_w) + 0.75rem) calc(var(--_w) + 1rem);
+}
+
+.lcars-bracket::before,
+.lcars-bracket::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  width: var(--_arm);
+  border: var(--_w) solid var(--lcars-c);
+  pointer-events: none;
+}
+
+.lcars-bracket::before {
+  left: 0;
+  border-right: 0;
+  border-radius: calc(var(--_w) * 2.5) 0 0 calc(var(--_w) * 2.5);
+}
+
+.lcars-bracket::after {
+  right: 0;
+  border-left: 0;
+  border-radius: 0 calc(var(--_w) * 2.5) calc(var(--_w) * 2.5) 0;
+}
+
+.lcars-bracket--start::after { display: none; }
+.lcars-bracket--end::before { display: none; }
+
+.lcars-bracket > :last-child {
+  margin-bottom: 0;
+}

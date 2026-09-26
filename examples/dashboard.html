@@ -1,0 +1,164 @@
+<!doctype html>
+<!--
+  A realistic single-page app built only from framework classes. The only
+  custom code is the small <script> at the end that fakes live telemetry.
+-->
+<html lang="en" class="lcars">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LCARS Operations Dashboard</title>
+  <link rel="stylesheet" href="../dist/lcars.css">
+  <script type="module" src="../dist/lcars.js"></script>
+</head>
+<body>
+  <div class="lcars-app" data-lcars-sound>
+
+    <!-- ── Header ─────────────────────────────────────────── -->
+    <header class="lcars-frame">
+      <div class="lcars-frame__side">
+        <a class="lcars-block lcars-c-pink" href="index.html">← Library</a>
+        <div class="lcars-block lcars-grow lcars-c-pink">01-1701</div>
+      </div>
+      <div class="lcars-frame__main lcars-split" style="align-items: flex-end">
+        <dl class="lcars-readout" style="margin: 0; min-width: 12rem">
+          <dt>Stardate</dt><dd data-lcars-stardate></dd>
+          <dt>Ship time</dt><dd data-lcars-clock></dd>
+          <dt>Condition</dt><dd id="condition" class="lcars-text-green">Green</dd>
+        </dl>
+        <h1 class="lcars-title">Operations</h1>
+      </div>
+      <div class="lcars-frame__elbow-bottom lcars-c-pink"></div>
+      <div class="lcars-frame__bar-bottom">
+        <span class="lcars-block lcars-grow-3 lcars-c-pink"></span>
+        <span class="lcars-block lcars-c-sunflower"></span>
+        <span class="lcars-block lcars-grow-6 lcars-c-orange"></span>
+        <span class="lcars-block lcars-c-blue lcars-round-end" style="flex: 0 0 2.5rem"></span>
+      </div>
+    </header>
+
+    <!-- ── Body ───────────────────────────────────────────── -->
+    <div class="lcars-frame">
+      <div class="lcars-frame__elbow-top lcars-c-orange">Systems</div>
+      <div class="lcars-frame__bar-top">
+        <span class="lcars-block lcars-c-orange"></span>
+        <span class="lcars-block lcars-grow-2 lcars-c-peach"></span>
+        <span class="lcars-block lcars-grow-8 lcars-c-orange"></span>
+      </div>
+
+      <nav class="lcars-frame__side" aria-label="Departments">
+        <a class="lcars-block lcars-c-sunflower" href="#" aria-current="page">Bridge</a>
+        <a class="lcars-block lcars-c-peach" href="#">Engineering</a>
+        <a class="lcars-block lcars-c-violet" href="#">Sciences</a>
+        <a class="lcars-block lcars-c-blue" href="#">Tactical</a>
+        <div class="lcars-block lcars-grow lcars-c-orange"></div>
+        <button class="lcars-block lcars-block--tall lcars-c-tomato" data-lcars-toggle-alert data-lcars-tone="deny">Red alert</button>
+      </nav>
+
+      <main class="lcars-frame__main">
+        <div class="lcars-grid" style="--lcars-grid-min: 19rem">
+
+          <section class="lcars-bracket lcars-c-violet" aria-labelledby="power-h">
+            <h2 id="power-h" style="font-size: var(--lcars-text-xl)">Power distribution</h2>
+            <div class="lcars-stack" style="--lcars-space: .75rem">
+              <div>
+                <div class="lcars-split"><span class="lcars-label">Warp core</span><span class="lcars-num" data-out="warp"></span></div>
+                <div class="lcars-meter lcars-c-ice" role="meter" aria-label="Warp core" aria-valuemin="0" aria-valuemax="100" aria-valuenow="87" data-meter="warp"></div>
+              </div>
+              <div>
+                <div class="lcars-split"><span class="lcars-label">Impulse</span><span class="lcars-num" data-out="impulse"></span></div>
+                <div class="lcars-meter lcars-c-orange" role="meter" aria-label="Impulse" aria-valuemin="0" aria-valuemax="100" aria-valuenow="54" data-meter="impulse"></div>
+              </div>
+              <div>
+                <div class="lcars-split"><span class="lcars-label">Shields</span><span class="lcars-num" data-out="shields"></span></div>
+                <div class="lcars-meter lcars-c-violet" role="meter" aria-label="Shields" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" data-meter="shields"></div>
+              </div>
+              <div>
+                <div class="lcars-split"><span class="lcars-label">Life support</span><span class="lcars-num" data-out="life"></span></div>
+                <div class="lcars-meter lcars-c-green" role="meter" aria-label="Life support" aria-valuemin="0" aria-valuemax="100" aria-valuenow="99" data-meter="life"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="lcars-bracket lcars-c-sky" aria-labelledby="sensor-h">
+            <h2 id="sensor-h" style="font-size: var(--lcars-text-xl)">Sensor sweep</h2>
+            <div class="lcars-data" data-lcars-cascade="60" style="--lcars-data-cols: 6"></div>
+          </section>
+
+          <section class="lcars-bracket lcars-c-orange" aria-labelledby="nav-h">
+            <h2 id="nav-h" style="font-size: var(--lcars-text-xl)">Navigation</h2>
+            <form class="lcars-stack" style="--lcars-space: .75rem" onsubmit="event.preventDefault(); LCARS.beep('confirm')">
+              <label class="lcars-field">
+                <span class="lcars-label">Destination</span>
+                <select class="lcars-input">
+                  <option>Starbase 74</option>
+                  <option>Deep Space 9</option>
+                  <option>Earth, Sol system</option>
+                </select>
+              </label>
+              <label class="lcars-field">
+                <span class="lcars-label">Warp factor</span>
+                <input class="lcars-range" type="range" min="1" max="9.9" step="0.1" value="6">
+              </label>
+              <div class="lcars-cluster">
+                <label class="lcars-choice"><input class="lcars-switch" type="checkbox" checked> Evasive</label>
+                <button class="lcars-button lcars-round-end" style="margin-left: auto">Engage</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="lcars-span-all" aria-labelledby="crew-h">
+            <div class="lcars-bar" style="margin-bottom: 1rem">
+              <span class="lcars-block lcars-round-start lcars-c-blue lcars-bar__fixed" style="width: 2.5rem"></span>
+              <h2 id="crew-h" class="lcars-bar__title">Away team</h2>
+              <span class="lcars-block lcars-grow-6 lcars-c-blue"></span>
+              <span class="lcars-block lcars-c-violet lcars-round-end"></span>
+            </div>
+            <table class="lcars-table lcars-c-blue">
+              <thead>
+                <tr><th>Officer</th><th>Department</th><th>Location</th><th>Status</th><th class="lcars-num">Vitals</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Commander</td><td>Command</td><td>Planet surface</td><td><span class="lcars-pill lcars-c-green">Nominal</span></td><td class="lcars-num">98</td></tr>
+                <tr><td>Lt. Commander</td><td>Operations</td><td>Planet surface</td><td><span class="lcars-pill lcars-c-green">Nominal</span></td><td class="lcars-num">100</td></tr>
+                <tr><td>Lieutenant</td><td>Security</td><td>Cave system</td><td><span class="lcars-pill lcars-c-gold">No contact</span></td><td class="lcars-num">—</td></tr>
+                <tr><td>Doctor</td><td>Medical</td><td>Transporter room 3</td><td><span class="lcars-pill lcars-pill--outline lcars-c-sunflower">Standby</span></td><td class="lcars-num">97</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+        </div>
+      </main>
+
+      <div class="lcars-frame__elbow-bottom lcars-c-blue">47</div>
+      <div class="lcars-frame__bar-bottom">
+        <span class="lcars-block lcars-grow-4 lcars-c-blue"></span>
+        <span class="lcars-block lcars-c-sky"></span>
+        <span class="lcars-block lcars-grow-2 lcars-c-blue lcars-round-end"></span>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Fake telemetry: nudge each meter's aria-valuenow; lcars.js keeps the bar in sync.
+    const outputs = Object.fromEntries([...document.querySelectorAll("[data-out]")].map((el) => [el.dataset.out, el]));
+    const meters = [...document.querySelectorAll("[data-meter]")];
+    const update = () => {
+      for (const m of meters) {
+        const next = Math.max(20, Math.min(100, +m.getAttribute("aria-valuenow") + Math.round((Math.random() - 0.5) * 6)));
+        m.setAttribute("aria-valuenow", next);
+        outputs[m.dataset.meter].textContent = `${next}%`;
+      }
+    };
+    update();
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(update, 1500);
+
+    document.addEventListener("lcars:alert", (e) => {
+      const condition = document.getElementById("condition");
+      condition.textContent = e.detail.active ? "Red" : "Green";
+      condition.className = e.detail.active ? "lcars-text-alert lcars-blink" : "lcars-text-green";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+/*
+ * .lcars-bar — a horizontal strip of segments separated by thin gaps.
+ * The frame's __bar-top / __bar-bottom share these rules.
+ *
+ *   <div class="lcars-bar">
+ *     <span class="lcars-block lcars-grow-3"></span>
+ *     <h1 class="lcars-bar__title">Engineering</h1>
+ *     <span class="lcars-block lcars-c-violet"></span>
+ *     <span class="lcars-block lcars-round-end"></span>
+ *   </div>
+ *
+ * Segments share the width equally; use .lcars-grow-* to weight them and
+ * .lcars-bar__fixed (or any fixed width) to stop one from stretching.
+ */
+
+.lcars-bar,
+.lcars-frame__bar-top,
+.lcars-frame__bar-bottom {
+  display: flex;
+  align-items: stretch;
+  gap: var(--lcars-gap);
+  height: var(--lcars-bar);
+  min-width: 0;
+}
+
+:is(.lcars-bar, .lcars-frame__bar-top, .lcars-frame__bar-bottom) > * {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+:is(.lcars-bar, .lcars-frame__bar-top, .lcars-frame__bar-bottom) > .lcars-block {
+  min-height: 0;
+  padding-block: 0;
+  align-items: center;
+  font-size: var(--lcars-text-xs);
+}
+
+:is(.lcars-bar, .lcars-frame__bar-top, .lcars-frame__bar-bottom) > .lcars-button {
+  min-height: 0;
+  min-width: 0;
+  align-items: center;
+  padding-block: 0;
+  font-size: var(--lcars-text-xs);
+}
+
+.lcars-bar__fixed,
+:is(.lcars-bar, .lcars-frame__bar-top, .lcars-frame__bar-bottom) > .lcars-bar__title {
+  flex: 0 0 auto;
+}
+
+/* Text that sits in the bar, on the background, e.g. a page title. */
+.lcars-bar__title {
+  --lcars-c: var(--lcars-heading);
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding-inline: calc(var(--lcars-gap) * 2);
+  color: var(--lcars-c);
+  font-family: var(--lcars-font);
+  font-size: calc(var(--lcars-bar) * 1.45);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  text-transform: var(--lcars-case);
+}
+
+.lcars-bar--thin { --lcars-bar: 0.6rem; }
+.lcars-bar--thick { --lcars-bar: 2.5rem; }

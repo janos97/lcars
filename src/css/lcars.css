@@ -1,0 +1,24 @@
+/*
+ * LCARS — a framework-agnostic LCARS design system.
+ *
+ * Everything lives in cascade layers, so any unlayered CSS in your app
+ * overrides it without specificity fights. Import order below == layer order.
+ */
+@layer lcars.tokens, lcars.base, lcars.layout, lcars.components, lcars.utilities;
+
+@import "./fonts.css";
+@import "./tokens.css" layer(lcars.tokens);
+@import "./themes.css" layer(lcars.tokens);
+@import "./base.css" layer(lcars.base);
+@import "./layout.css" layer(lcars.layout);
+@import "./frame.css" layer(lcars.layout);
+@import "./components/block.css" layer(lcars.components);
+@import "./components/button.css" layer(lcars.components);
+@import "./components/bar.css" layer(lcars.components);
+@import "./components/bracket.css" layer(lcars.components);
+@import "./components/typography.css" layer(lcars.components);
+@import "./components/meter.css" layer(lcars.components);
+@import "./components/data.css" layer(lcars.components);
+@import "./components/table.css" layer(lcars.components);
+@import "./components/form.css" layer(lcars.components);
+@import "./utilities.css" layer(lcars.utilities);

@@ -1,0 +1,60 @@
+<!doctype html>
+<!--
+  The smallest useful LCARS page. Copy this file to start a new app.
+  Swap the ../dist/ paths for your install location or the CDN
+  (see README → Install).
+-->
+<html lang="en" class="lcars">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LCARS Starter</title>
+  <link rel="stylesheet" href="../dist/lcars.css">
+  <script type="module" src="../dist/lcars.js"></script>
+</head>
+<body>
+  <div class="lcars-app">
+
+    <!-- Header: elbow at the bottom -->
+    <header class="lcars-frame">
+      <div class="lcars-frame__side">
+        <a class="lcars-block lcars-grow lcars-c-violet" href="#">LCARS</a>
+      </div>
+      <div class="lcars-frame__main">
+        <h1 class="lcars-title">Starter</h1>
+      </div>
+      <div class="lcars-frame__elbow-bottom lcars-c-violet"></div>
+      <div class="lcars-frame__bar-bottom">
+        <span class="lcars-block lcars-grow-4 lcars-c-violet"></span>
+        <span class="lcars-block lcars-c-orange"></span>
+        <span class="lcars-block lcars-grow-2 lcars-c-blue"></span>
+      </div>
+    </header>
+
+    <!-- Body: elbow at the top, sidebar navigation -->
+    <div class="lcars-frame">
+      <div class="lcars-frame__elbow-top lcars-c-orange"></div>
+      <div class="lcars-frame__bar-top">
+        <span class="lcars-block lcars-grow-2 lcars-c-orange"></span>
+        <span class="lcars-block lcars-c-sunflower"></span>
+        <span class="lcars-block lcars-grow-6 lcars-c-orange"></span>
+      </div>
+      <nav class="lcars-frame__side" aria-label="Main">
+        <a class="lcars-block lcars-c-sunflower" href="#" aria-current="page">Home</a>
+        <a class="lcars-block lcars-c-peach" href="#">Reports</a>
+        <a class="lcars-block lcars-c-blue" href="#">Settings</a>
+        <div class="lcars-block lcars-grow lcars-c-orange"></div>
+      </nav>
+      <main class="lcars-frame__main lcars-stack">
+        <h2>Welcome aboard</h2>
+        <p>Your content goes here. Stardate <span data-lcars-stardate></span>, <span data-lcars-clock></span>.</p>
+        <div class="lcars-cluster">
+          <button class="lcars-button">Engage</button>
+          <button class="lcars-button lcars-c-violet lcars-round-end">Scan</button>
+        </div>
+      </main>
+    </div>
+
+  </div>
+</body>
+</html>

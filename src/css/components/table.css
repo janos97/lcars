@@ -1,0 +1,58 @@
+/*
+ * .lcars-table — data table with colored header and row caps.
+ * Add .lcars-num to numeric cells to right-align them.
+ */
+
+.lcars-table {
+  --lcars-c: var(--lcars-tertiary);
+  width: 100%;
+  margin: 0 0 1em;
+  border-collapse: separate;
+  border-spacing: 0 var(--lcars-gap);
+  font-family: var(--lcars-font);
+  font-variant-numeric: tabular-nums;
+}
+
+.lcars-table caption {
+  padding-bottom: 0.5em;
+  color: var(--lcars-heading);
+  font-size: var(--lcars-text-lg);
+  text-align: start;
+  text-transform: var(--lcars-case);
+}
+
+.lcars-table th {
+  padding: 0.35em 0.75em;
+  color: var(--lcars-accent);
+  font-size: var(--lcars-text-sm);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-align: start;
+  text-transform: var(--lcars-case);
+  border-bottom: var(--lcars-gap) solid var(--lcars-c);
+}
+
+.lcars-table td {
+  padding: 0.4em 0.75em;
+  background-color: color-mix(in srgb, var(--lcars-c) 10%, transparent);
+}
+
+.lcars-table tbody tr:nth-child(even) td {
+  background-color: color-mix(in srgb, var(--lcars-c) 4%, transparent);
+}
+
+.lcars-table td:first-child {
+  border-left: 0.75rem solid var(--lcars-c);
+}
+
+.lcars-table th:first-child {
+  padding-left: calc(0.75em + 0.75rem);
+}
+
+.lcars-table tbody tr:hover td {
+  background-color: color-mix(in srgb, var(--lcars-c) 22%, transparent);
+}
+
+.lcars-table :is(th, td).lcars-num {
+  text-align: end;
+}

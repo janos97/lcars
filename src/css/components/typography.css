@@ -1,0 +1,82 @@
+/*
+ * Text components.
+ *
+ *   .lcars-title   display heading, right-aligned like a console header
+ *   .lcars-label   small uppercase caption
+ *   .lcars-pill    small rounded status tag
+ *   .lcars-list    list with block-shaped bullets
+ */
+
+.lcars-title {
+  --lcars-c: var(--lcars-heading);
+  margin: 0;
+  color: var(--lcars-c);
+  font-family: var(--lcars-font);
+  font-size: var(--lcars-text-3xl);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: var(--lcars-tracking);
+  text-align: end;
+  text-transform: var(--lcars-case);
+  overflow-wrap: anywhere;
+}
+
+.lcars-label {
+  --lcars-c: var(--lcars-accent);
+  display: block;
+  color: var(--lcars-c);
+  font-family: var(--lcars-font);
+  font-size: var(--lcars-text-sm);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+  text-transform: var(--lcars-case);
+}
+
+.lcars-pill {
+  --lcars-c: var(--lcars-tertiary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.15em 0.75em;
+  border-radius: var(--lcars-pill);
+  background-color: var(--lcars-c);
+  color: var(--lcars-on-c);
+  font-family: var(--lcars-font);
+  font-size: var(--lcars-text-xs);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  text-transform: var(--lcars-case);
+  white-space: nowrap;
+}
+
+.lcars-pill--outline {
+  background-color: transparent;
+  box-shadow: inset 0 0 0 2px var(--lcars-c);
+  color: var(--lcars-c);
+}
+
+.lcars-list {
+  --lcars-c: var(--lcars-primary);
+  margin: 0 0 1em;
+  padding: 0;
+  list-style: none;
+}
+
+.lcars-list > li {
+  position: relative;
+  margin-bottom: 0.35em;
+  padding-left: 1.75em;
+}
+
+.lcars-list > li::before {
+  content: "";
+  position: absolute;
+  top: 0.3em;
+  left: 0;
+  width: 1.2em;
+  height: 0.75em;
+  border-radius: var(--lcars-pill) 0 0 var(--lcars-pill);
+  background-color: var(--lcars-c);
+}

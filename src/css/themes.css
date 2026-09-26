@@ -1,0 +1,85 @@
+/*
+ * Themes remap the semantic roles. Apply with data-lcars-theme="…" on <html>
+ * or on any element to theme just that subtree. The default (no attribute)
+ * is "classic".
+ *
+ * To add your own theme, copy one block and change the values — every theme
+ * must define the same role variables (test/tokens.test.mjs checks this).
+ */
+
+/* The Next Generation — orange, violet, periwinkle. */
+[data-lcars-theme="classic"] {
+  --lcars-fg: var(--lcars-sunflower);
+  --lcars-primary: var(--lcars-orange);
+  --lcars-secondary: var(--lcars-violet);
+  --lcars-tertiary: var(--lcars-blue);
+  --lcars-accent: var(--lcars-butterscotch);
+  --lcars-muted: var(--lcars-gray);
+  --lcars-alert: var(--lcars-tomato);
+  --lcars-active: var(--lcars-white);
+  --lcars-heading: var(--lcars-orange);
+  --lcars-link: var(--lcars-ice);
+}
+
+/* Nemesis-era blues and greys. */
+[data-lcars-theme="nemesis"] {
+  --lcars-fg: #ccddff;
+  --lcars-primary: #7799ee;
+  --lcars-secondary: #99ccff;
+  --lcars-tertiary: #aaaacc;
+  --lcars-accent: #ffaa66;
+  --lcars-muted: #667799;
+  --lcars-alert: #ff5544;
+  --lcars-active: #ffffff;
+  --lcars-heading: #99ccff;
+  --lcars-link: #ffcc88;
+}
+
+/* Brighter, higher-contrast late-24th-century palette. */
+[data-lcars-theme="lower-decks"] {
+  --lcars-fg: #ffe6c7;
+  --lcars-primary: #ff7700;
+  --lcars-secondary: #ffcc33;
+  --lcars-tertiary: #9ea5ff;
+  --lcars-accent: #e7727d;
+  --lcars-muted: #8b8fa8;
+  --lcars-alert: #ff3a3a;
+  --lcars-active: #ffffff;
+  --lcars-heading: #ffcc33;
+  --lcars-link: #9ea5ff;
+}
+
+/* Condition red. Unlike the other themes it also remaps the named swatches,
+ * so the whole display turns red. Pair with data-lcars-alert to pulse the
+ * frame (lcars.js setAlert() does both). */
+[data-lcars-theme="red-alert"] {
+  --lcars-orange: #ff4433;
+  --lcars-gold: #ff5544;
+  --lcars-butterscotch: #ff7766;
+  --lcars-peach: #ff6655;
+  --lcars-sunflower: #ffaa99;
+  --lcars-violet: #ff8877;
+  --lcars-lilac: #ff5566;
+  --lcars-pink: #ee8888;
+  --lcars-magenta: #dd3344;
+  --lcars-blue: #ff9988;
+  --lcars-sky: #ffbbaa;
+  --lcars-ice: #ffccbb;
+  --lcars-moonlight: #ffdddd;
+  --lcars-green: #ff7755;
+  --lcars-red: #cc3333;
+  --lcars-mars: #ff2200;
+  --lcars-tomato: #ff5555;
+  --lcars-gray: #aa6666;
+
+  --lcars-fg: #ffc9c0;
+  --lcars-primary: #ff4433;
+  --lcars-secondary: #ff8877;
+  --lcars-tertiary: #ffbbaa;
+  --lcars-accent: #ff6655;
+  --lcars-muted: #aa6666;
+  --lcars-alert: #ffffff;
+  --lcars-active: #ffffff;
+  --lcars-heading: #ff4433;
+  --lcars-link: #ffbbaa;
+}

@@ -1,26 +1,52 @@
 {
-  "name": "LCARS",
-  "version": "0.0.1",
-  "description": "LCARS website framework",
+  "name": "lcars",
+  "version": "1.0.0",
+  "description": "A framework-agnostic LCARS design system: CSS tokens, layout frames, components and an optional tiny JS helper.",
+  "type": "module",
+  "style": "dist/lcars.css",
+  "main": "dist/lcars.js",
+  "exports": {
+    ".": {
+      "style": "./dist/lcars.css",
+      "default": "./dist/lcars.js"
+    },
+    "./lcars.css": "./dist/lcars.css",
+    "./lcars.min.css": "./dist/lcars.min.css",
+    "./lcars.js": "./dist/lcars.js",
+    "./fonts/*": "./dist/fonts/*",
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "*.css",
+    "./dist/lcars.js"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/dev.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "keywords": [
+    "lcars",
+    "star-trek",
+    "css",
+    "design-system",
+    "ui"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Garrett-/lcars.git"
+    "url": "https://github.com/janos97/lcars.git"
   },
-  "author": "Josh Messer",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Garrett-/lcars/issues"
+  "engines": {
+    "node": ">=20"
   },
-  "homepage": "https://github.com/Garrett-/lcars",
   "devDependencies": {
-    "rupture": "^0.1.0",
-    "gulp": "^3.6.2",
-    "stylus": "^0.44.0",
-    "nib": "^1.0.2",
-    "gulp-stylus": "^1.0.0",
-    "gulp-concat": "^2.2.0",
-    "gulp-load-plugins": "^0.5.0",
-    "gulp-minify-css": "^0.3.4",
-    "gulp-rename": "^1.2.0"
+    "lightningcss": "^1.33.0"
   }
 }

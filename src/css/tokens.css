@@ -1,0 +1,74 @@
+/*
+ * Design tokens. Override any of these on :root (or any element) to
+ * re-skin the whole system. Components only ever read these variables.
+ */
+:root {
+  /* ── Palette ───────────────────────────────────────────────
+   * Named swatches. Keep this list in sync with utilities.css
+   * (test/tokens.test.mjs enforces it). */
+  --lcars-orange: #ff9900;
+  --lcars-gold: #ffaa00;
+  --lcars-butterscotch: #ff9966;
+  --lcars-peach: #ff8866;
+  --lcars-sunflower: #ffcc99;
+  --lcars-violet: #cc99ff;
+  --lcars-lilac: #cc55ff;
+  --lcars-pink: #cc99cc;
+  --lcars-magenta: #cc5599;
+  --lcars-blue: #9999ff;
+  --lcars-sky: #aaaaff;
+  --lcars-ice: #99ccff;
+  --lcars-moonlight: #ddddff;
+  --lcars-green: #99cc66;
+  --lcars-red: #cc4444;
+  --lcars-mars: #ff2200;
+  --lcars-tomato: #ff5555;
+  --lcars-gray: #8a8aa6;
+  --lcars-white: #f5f6fa;
+
+  /* ── Semantic roles ────────────────────────────────────────
+   * Themes (themes.css) only reassign these. */
+  --lcars-bg: #000;
+  --lcars-fg: var(--lcars-sunflower);
+  --lcars-on-c: #000;
+  --lcars-primary: var(--lcars-orange);
+  --lcars-secondary: var(--lcars-violet);
+  --lcars-tertiary: var(--lcars-blue);
+  --lcars-accent: var(--lcars-butterscotch);
+  --lcars-muted: var(--lcars-gray);
+  --lcars-alert: var(--lcars-tomato);
+  --lcars-active: var(--lcars-white);
+  --lcars-heading: var(--lcars-primary);
+  --lcars-link: var(--lcars-ice);
+  --lcars-focus: var(--lcars-white);
+
+  /* ── Typography ───────────────────────────────────────────── */
+  --lcars-font: "Antonio", "Oswald", "Roboto Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --lcars-font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --lcars-case: uppercase;
+  --lcars-tracking: 0.03em;
+  --lcars-text-xs: 0.8125rem;
+  --lcars-text-sm: 0.9375rem;
+  --lcars-text-base: 1.125rem;
+  --lcars-text-lg: 1.375rem;
+  --lcars-text-xl: 1.75rem;
+  --lcars-text-2xl: 2.5rem;
+  --lcars-text-3xl: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+
+  /* ── Geometry ─────────────────────────────────────────────
+   * The frame is drawn entirely from these values. */
+  --lcars-gap: 0.25rem;                     /* the thin black gaps between pieces */
+  --lcars-space: 1rem;                      /* default spacing for layout helpers */
+  --lcars-side: clamp(5.5rem, 16vw, 10rem); /* sidebar / vertical arm width */
+  --lcars-bar: 1.5rem;                      /* horizontal bar thickness */
+  --lcars-elbow-height: 4.5rem;             /* height of an elbow block */
+  --lcars-elbow-reach: 3rem;                /* how far the elbow's arm reaches past the sidebar */
+  --lcars-elbow-rx: 65%;                    /* outer curve, horizontal radius (% of --lcars-side) */
+  --lcars-inner-radius: 1.5rem;             /* inner fillet where arm meets bar */
+  --lcars-block-height: 3.5rem;             /* sidebar block height */
+  --lcars-control: 2.75rem;                 /* button / input height */
+  --lcars-pill: 100vmax;                    /* "fully rounded" radius */
+
+  /* ── Motion ───────────────────────────────────────────────── */
+  --lcars-duration: 140ms;
+}

@@ -1,0 +1,118 @@
+/*
+ * Utilities. These sit in the last layer, so they beat component defaults
+ * (but not your own unlayered CSS).
+ *
+ * Color: every colored LCARS piece reads --lcars-c. .lcars-c-* sets it, so
+ * the same class recolors a block, button, elbow, bracket, meter, etc.
+ * .lcars-text-* sets the text color instead.
+ */
+
+/* ── Roles ── */
+.lcars-c-primary { --lcars-c: var(--lcars-primary); }
+.lcars-c-secondary { --lcars-c: var(--lcars-secondary); }
+.lcars-c-tertiary { --lcars-c: var(--lcars-tertiary); }
+.lcars-c-accent { --lcars-c: var(--lcars-accent); }
+.lcars-c-muted { --lcars-c: var(--lcars-muted); }
+.lcars-c-alert { --lcars-c: var(--lcars-alert); }
+.lcars-c-active { --lcars-c: var(--lcars-active); }
+
+/* ── Palette ── */
+.lcars-c-orange { --lcars-c: var(--lcars-orange); }
+.lcars-c-gold { --lcars-c: var(--lcars-gold); }
+.lcars-c-butterscotch { --lcars-c: var(--lcars-butterscotch); }
+.lcars-c-peach { --lcars-c: var(--lcars-peach); }
+.lcars-c-sunflower { --lcars-c: var(--lcars-sunflower); }
+.lcars-c-violet { --lcars-c: var(--lcars-violet); }
+.lcars-c-lilac { --lcars-c: var(--lcars-lilac); }
+.lcars-c-pink { --lcars-c: var(--lcars-pink); }
+.lcars-c-magenta { --lcars-c: var(--lcars-magenta); }
+.lcars-c-blue { --lcars-c: var(--lcars-blue); }
+.lcars-c-sky { --lcars-c: var(--lcars-sky); }
+.lcars-c-ice { --lcars-c: var(--lcars-ice); }
+.lcars-c-moonlight { --lcars-c: var(--lcars-moonlight); }
+.lcars-c-green { --lcars-c: var(--lcars-green); }
+.lcars-c-red { --lcars-c: var(--lcars-red); }
+.lcars-c-mars { --lcars-c: var(--lcars-mars); }
+.lcars-c-tomato { --lcars-c: var(--lcars-tomato); }
+.lcars-c-gray { --lcars-c: var(--lcars-gray); }
+.lcars-c-white { --lcars-c: var(--lcars-white); }
+
+/* ── Text color ── */
+.lcars-text-fg { color: var(--lcars-fg); }
+.lcars-text-primary { color: var(--lcars-primary); }
+.lcars-text-secondary { color: var(--lcars-secondary); }
+.lcars-text-tertiary { color: var(--lcars-tertiary); }
+.lcars-text-accent { color: var(--lcars-accent); }
+.lcars-text-muted { color: var(--lcars-muted); }
+.lcars-text-alert { color: var(--lcars-alert); }
+.lcars-text-active { color: var(--lcars-active); }
+.lcars-text-orange { color: var(--lcars-orange); }
+.lcars-text-gold { color: var(--lcars-gold); }
+.lcars-text-butterscotch { color: var(--lcars-butterscotch); }
+.lcars-text-peach { color: var(--lcars-peach); }
+.lcars-text-sunflower { color: var(--lcars-sunflower); }
+.lcars-text-violet { color: var(--lcars-violet); }
+.lcars-text-lilac { color: var(--lcars-lilac); }
+.lcars-text-pink { color: var(--lcars-pink); }
+.lcars-text-magenta { color: var(--lcars-magenta); }
+.lcars-text-blue { color: var(--lcars-blue); }
+.lcars-text-sky { color: var(--lcars-sky); }
+.lcars-text-ice { color: var(--lcars-ice); }
+.lcars-text-moonlight { color: var(--lcars-moonlight); }
+.lcars-text-green { color: var(--lcars-green); }
+.lcars-text-red { color: var(--lcars-red); }
+.lcars-text-mars { color: var(--lcars-mars); }
+.lcars-text-tomato { color: var(--lcars-tomato); }
+.lcars-text-gray { color: var(--lcars-gray); }
+.lcars-text-white { color: var(--lcars-white); }
+
+/* ── Shape ── */
+.lcars-round { border-radius: var(--lcars-pill); }
+.lcars-round-start { border-radius: var(--lcars-pill) 0 0 var(--lcars-pill); }
+.lcars-round-end { border-radius: 0 var(--lcars-pill) var(--lcars-pill) 0; }
+.lcars-square { border-radius: 0; }
+
+/* ── Flex sizing (bar segments, sidebar fillers) ── */
+.lcars-grow { flex-grow: 1; }
+.lcars-grow-0 { flex-grow: 0; }
+.lcars-grow-2 { flex-grow: 2; }
+.lcars-grow-3 { flex-grow: 3; }
+.lcars-grow-4 { flex-grow: 4; }
+.lcars-grow-6 { flex-grow: 6; }
+.lcars-grow-8 { flex-grow: 8; }
+
+/* ── Text ── */
+.lcars-upper { text-transform: uppercase; }
+.lcars-num { font-variant-numeric: tabular-nums; }
+.lcars-text-start { text-align: start; }
+.lcars-text-center { text-align: center; }
+.lcars-text-end { text-align: end; }
+
+/* ── Motion (disabled for users who prefer reduced motion) ── */
+@media (prefers-reduced-motion: no-preference) {
+  .lcars-pulse { animation: lcars-pulse 1.2s ease-in-out infinite; }
+  .lcars-blink { animation: lcars-blink 1s steps(1) infinite; }
+
+  [data-lcars-alert] :is(
+    .lcars-frame__elbow-top,
+    .lcars-frame__elbow-bottom,
+    .lcars-frame__bar-top > *,
+    .lcars-frame__bar-bottom > *,
+    .lcars-frame__side > *
+  ) {
+    animation: lcars-pulse 1.2s ease-in-out infinite;
+  }
+}
+
+/* ── Accessibility ── */
+.lcars-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
