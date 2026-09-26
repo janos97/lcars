@@ -1,0 +1,52 @@
+/*
+ * .lcars-svg — inline SVG artwork that follows LCARS colors and states.
+ * (The idea comes from upstream's "SVG special elements" by jrwarwick.)
+ *
+ * Every shape without its own fill attribute is painted with --lcars-c, so
+ * .lcars-c-* classes and themes work on <path>, <rect>, <circle>, …
+ * Shapes with role="button" (plus tabindex="0" and an aria-label) become
+ * controls; lcars.js adds Enter/Space activation for them.
+ *
+ *   <svg class="lcars-svg" viewBox="0 0 80 80" role="group" aria-label="Scanner">
+ *     <path class="lcars-c-accent" role="button" tabindex="0" aria-label="Up" d="…"/>
+ *   </svg>
+ */
+
+.lcars-svg {
+  --lcars-c: var(--lcars-primary);
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  overflow: visible;
+  vertical-align: middle;
+}
+
+.lcars-svg :where(path, rect, circle, ellipse, polygon, polyline):not([fill]) {
+  fill: var(--lcars-c);
+  transition: fill var(--lcars-duration) ease, filter var(--lcars-duration) ease;
+}
+
+.lcars-svg [role="button"] {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lcars-svg [role="button"]:hover:not([aria-disabled="true"]) {
+  filter: brightness(1.18);
+}
+
+.lcars-svg [role="button"]:active:not([aria-disabled="true"]) {
+  filter: brightness(0.8);
+}
+
+.lcars-svg [role="button"]:focus-visible {
+  outline: none;
+  stroke: var(--lcars-focus);
+  stroke-width: 2px;
+  vector-effect: non-scaling-stroke;
+}
+
+.lcars-svg [role="button"][aria-disabled="true"] {
+  cursor: not-allowed;
+  filter: saturate(0.3) brightness(0.55);
+}

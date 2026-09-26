@@ -72,6 +72,8 @@ Files: `dist/lcars.css` (readable), `dist/lcars.min.css`, `dist/lcars.js` (ES mo
 | A section heading | `.lcars-bar` containing a `.lcars-bar__title` (recipe: section-heading) |
 | Tabs or a segmented control | `.lcars-cluster` of `.lcars-button--sm` with `role="tab"`/`aria-selected` (recipe: tabs) |
 | A modal | `<dialog class="lcars-dialog">` wrapping a bracket or frame (recipe: dialog) |
+| Custom shapes or a widget (e.g. the circular X/Y control) | Inline `<svg class="lcars-svg">` with `.lcars-c-*` on shapes and `role="button"` on clickable ones (recipe: svg-control) |
+| Console sounds | `data-lcars-sound` on a container; `LCARS.beep("alert")`; your own files via `LCARS.setSounds({...})` |
 | Tabular data | `.lcars-table` with `.lcars-num` numeric cells and `.lcars-pill` statuses (recipe: data-table) |
 | A form | `.lcars-field` + `.lcars-input` / `.lcars-check` / `.lcars-switch` / `.lcars-range` (recipe: form) |
 | Status tag | `.lcars-pill` with `lcars-c-green` / `lcars-c-alert` / `lcars-c-muted` |
@@ -404,6 +406,27 @@ Styles a native <dialog> as an LCARS modal. Open with dialog.showModal(); close 
 </dialog>
 ```
 
+### SVG — `lcars-svg`
+
+Inline SVG that follows LCARS colors, themes and states — for shapes CSS boxes can't draw, such as the circular X/Y control. Shapes without a fill attribute are painted with --lcars-c.
+
+**Use on:** <svg> (inline, not <img>) · **Default color:** primary
+
+| Class | Description |
+| --- | --- |
+| `lcars-svg` | On the <svg>. Paints path/rect/circle/ellipse/polygon/polyline with --lcars-c (so .lcars-c-* works on shapes) and styles shapes with role="button" as controls. |
+
+**States:** role="button" shapes: hover/active brightness, focus ring (stroke), aria-pressed/aria-selected/aria-current → active color, aria-disabled="true" → dimmed.
+
+**Accessibility:** Give the <svg> role="group" and an aria-label; give each clickable shape role="button", tabindex="0" and an aria-label. lcars.js makes Enter/Space click them.
+
+```html
+<svg class="lcars-svg" viewBox="0 0 80 80" width="160" role="group" aria-label="Scanner">
+  <path class="lcars-c-accent" role="button" tabindex="0" aria-label="Up" d="m34 10h12v-9.5c-3.9-.5-8-.5-12 0z"/>
+  <path class="lcars-c-tertiary" d="m11 34v12h23v23h12v-23h23v-12h-23v-23h-12v23z"/>
+</svg>
+```
+
 ### Layout helpers — `lcars-stack`
 
 Small layout primitives. All use --lcars-space for spacing.
@@ -612,8 +635,9 @@ Auto-initialises on load and upgrades elements added later. `<html data-lcars-ma
 | `data-lcars-set-theme="id"` | clickable element | Switches the page theme on click ("" = default). |
 | `data-lcars-theme-select` | <select> | Fills itself with every theme and switches on change. |
 | `data-lcars-toggle-alert` | clickable element | Toggles red alert on click. |
-| `data-lcars-sound="tap\|confirm\|deny"` | ancestor element | Clicks on interactive descendants beep; "off" disables. |
-| `data-lcars-tone="tap\|confirm\|deny"` | interactive element | Overrides the beep tone for that element. |
+| `data-lcars-sound="tap\|confirm\|deny\|alert\|red-alert\|ready"` | ancestor element | Clicks on interactive descendants play that sound (default tap; entering red alert plays red-alert); "off" disables. |
+| `data-lcars-tone="…"` | interactive element | Overrides the sound for that element. |
+| `role="button" inside .lcars-svg` | SVG shape | Enter / Space activate it like a button. |
 | `aria-valuenow / -min / -max` | .lcars-meter | Kept in sync with --lcars-value. |
 | `data-lcars-manual` | <html> | Disables auto-init; call LCARS.init(el) yourself. |
 
@@ -624,7 +648,9 @@ Auto-initialises on load and upgrades elements added later. `<html data-lcars-ma
 | `init(scope = document)` | Upgrade LCARS elements inside scope. Idempotent. |
 | `setTheme(id, el = <html>)` | Apply a theme id ("" or null = default). Fires "lcars:theme". |
 | `setAlert(on?, el = <html>)` | Enter/leave red alert; no argument toggles. Restores the previous theme. Fires "lcars:alert". |
-| `beep(tone = "tap", { volume })` | Play a synthesized console tone: "tap", "confirm" or "deny". |
+| `beep(tone = "tap", { volume })` | Play a console sound: tap (acknowledge), confirm (alternate acknowledge), deny (negative acknowledge), alert, red-alert or ready. Synthesized unless setSounds() gave it a file. |
+| `setSounds({ tone: url \| null })` | Use your own audio files for any sound, e.g. setSounds({ "red-alert": "/sfx/klaxon.ogg" }); null restores the synthesized one. |
+| `SOUNDS` | Array of the built-in sound names. |
 | `stardate(date = new Date())` | "YYYY.DDD" string. |
 | `clock(date = new Date(), { seconds = true })` | "HH:MM:SS" string. |
 | `randomReadout(random = Math.random)` | Random LCARS-style number string. |
@@ -652,3 +678,4 @@ Full markup in docs/recipes.md; live pages in examples/recipes/.
 | `form` | Settings form in a bracket — text, select, textarea, switch, checkbox, range, a validation error and submit/cancel. |
 | `tabs` | Segmented control / tabs built from small buttons with role="tab" and aria-selected; a few lines of JS switch panels. |
 | `dialog` | Modal confirmation using a native <dialog class="lcars-dialog">; the frame inside gives it LCARS chrome. |
+| `svg-control` | The classic circular X/Y control as inline SVG — shapes colored with .lcars-c-* classes, each quadrant and arrow a keyboard-accessible button. Geometry adapted from upstream's widget by jrwarwick (MIT). |

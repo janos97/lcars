@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import LCARS, { stardate, clock, randomReadout } from "../src/js/lcars.js";
 
 test("module imports without a DOM and exposes its API", () => {
-  for (const fn of ["init", "setTheme", "setAlert", "beep", "stardate", "clock", "randomReadout"]) {
+  for (const fn of ["init", "setTheme", "setAlert", "beep", "setSounds", "stardate", "clock", "randomReadout"]) {
     assert.equal(typeof LCARS[fn], "function", fn);
   }
 });
@@ -26,4 +26,10 @@ test("randomReadout produces LCARS-style numbers", () => {
   for (let i = 0; i < 200; i++) {
     assert.match(randomReadout(rand), /^(\d{1,4}|\d{2}-\d{4}|\d\.\d{3})$/);
   }
+});
+
+test("sound names cover upstream's semantic events and beep is SSR-safe", () => {
+  assert.deepEqual([...LCARS.SOUNDS].sort(), ["alert", "confirm", "deny", "ready", "red-alert", "tap"]);
+  assert.doesNotThrow(() => LCARS.beep("red-alert"));
+  assert.doesNotThrow(() => LCARS.setSounds({ tap: "/x.ogg", tap2: null }));
 });

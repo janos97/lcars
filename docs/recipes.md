@@ -279,3 +279,36 @@ Modal confirmation using a native <dialog class="lcars-dialog">; the frame insid
   </form>
 </dialog>
 ```
+
+## SVG control (`svg-control`)
+
+The classic circular X/Y control as inline SVG — shapes colored with .lcars-c-* classes, each quadrant and arrow a keyboard-accessible button. Geometry adapted from upstream's widget by jrwarwick (MIT).
+
+```html
+<div class="lcars-cluster" data-lcars-sound style="--lcars-space: 2rem; align-items: center">
+  <svg class="lcars-svg" viewBox="0 0 80 80" width="240" height="240" role="group" aria-label="Directional control">
+    <path class="lcars-c-secondary" role="button" tabindex="0" aria-label="North-west" data-dir="NW" d="m32.977 33v-32.35c-15.992 2.4474-29.977 16.417-32.424 32.35z"/>
+    <path class="lcars-c-secondary" role="button" tabindex="0" aria-label="North-east" data-dir="NE" d="m47 33v-32.35c15.992 2.4474 29.977 16.417 32.424 32.35z"/>
+    <path class="lcars-c-secondary" role="button" tabindex="0" aria-label="South-west" data-dir="SW" d="m33 47v32.35c-15.992-2.4474-29.977-16.417-32.424-32.35z"/>
+    <path class="lcars-c-secondary" role="button" tabindex="0" aria-label="South-east" data-dir="SE" d="m47 47v32.35c15.992-2.4474 29.977-16.417 32.424-32.35z"/>
+    <path class="lcars-c-accent" role="button" tabindex="0" aria-label="Up" data-dir="Up" d="m34 10h12v-9.5c-3.8785-0.47437-8.044-0.4824-12 0z"/>
+    <path class="lcars-c-accent" role="button" tabindex="0" aria-label="Left" data-dir="Left" d="m10 46v-12h-9.5c-0.47437 3.8785-0.4824 8.044 0 12z"/>
+    <path class="lcars-c-accent" role="button" tabindex="0" aria-label="Right" data-dir="Right" d="m70 34v12h9.5c0.47437-3.8785 0.4824-8.044 0-12z"/>
+    <path class="lcars-c-accent" role="button" tabindex="0" aria-label="Down" data-dir="Down" d="m46 70h-12v9.5c3.8785 0.47437 8.044 0.4824 12 0z"/>
+    <path class="lcars-c-tertiary" d="m11 34v12h23v23h12v-23h23v-12h-23v-23h-12v23z"/>
+    <g fill="none" style="stroke: var(--lcars-bg)" stroke-width=".75">
+      <path d="m34 13.49h12m-12 2.71h12m-12 3.28h12m-12 8.42h12m-12 31.1h12"/>
+      <path d="m44.2 2.2v5.03m-42 28.57h5.03m70.57 8.4h-5.03m-41.97 33.6v-5.03" stroke-width="1.2"/>
+    </g>
+  </svg>
+  <dl class="lcars-readout">
+    <dt>Last input</dt><dd id="xy-last" aria-live="polite">—</dd>
+  </dl>
+</div>
+<script>
+  document.querySelector(".lcars-svg[aria-label='Directional control']").addEventListener("click", (e) => {
+    const dir = e.target.closest("[data-dir]")?.dataset.dir;
+    if (dir) document.getElementById("xy-last").textContent = dir;
+  });
+</script>
+```

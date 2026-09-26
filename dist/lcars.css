@@ -1237,6 +1237,45 @@
   .lcars-dialog::backdrop {
     background-color: #000c;
   }
+
+  .lcars-svg {
+    --lcars-c: var(--lcars-primary);
+    vertical-align: middle;
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+    overflow: visible;
+  }
+
+  .lcars-svg :where(path, rect, circle, ellipse, polygon, polyline):not([fill]) {
+    fill: var(--lcars-c);
+    transition: fill var(--lcars-duration) ease, filter var(--lcars-duration) ease;
+  }
+
+  .lcars-svg [role="button"] {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .lcars-svg [role="button"]:hover:not([aria-disabled="true"]) {
+    filter: brightness(1.18);
+  }
+
+  .lcars-svg [role="button"]:active:not([aria-disabled="true"]) {
+    filter: brightness(.8);
+  }
+
+  .lcars-svg [role="button"]:focus-visible {
+    stroke: var(--lcars-focus);
+    stroke-width: 2px;
+    vector-effect: non-scaling-stroke;
+    outline: none;
+  }
+
+  .lcars-svg [role="button"][aria-disabled="true"] {
+    cursor: not-allowed;
+    filter: saturate(.3) brightness(.55);
+  }
 }
 
 @layer lcars.utilities {
@@ -1549,7 +1588,7 @@
     overflow: hidden;
   }
 
-  :is(.lcars-block, .lcars-button):is([aria-current]:not([aria-current="false"]), [aria-pressed="true"], [aria-selected="true"], .is-active) {
+  :is(.lcars-block, .lcars-button):is([aria-current]:not([aria-current="false"]), [aria-pressed="true"], [aria-selected="true"], .is-active), .lcars-svg [role="button"]:is([aria-pressed="true"], [aria-selected="true"], [aria-current]:not([aria-current="false"])) {
     --lcars-c: var(--lcars-active);
   }
 
