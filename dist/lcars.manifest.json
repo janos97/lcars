@@ -73,6 +73,10 @@
       "do": "Use a single `.lcars-app` per page; nest `.lcars-frame`s inside `__main` instead."
     },
     {
+      "dont": "A wide `.lcars-table` straight in the page (overflows phones)",
+      "do": "Wrap it: `<div class=\"lcars-scroll\" tabindex=\"0\" aria-label=\"…\">`."
+    },
+    {
       "dont": "Opening a page that loads `lcars.js` from `file://`",
       "do": "Serve it over http (`npm run dev`, any static server)."
     }
@@ -322,6 +326,7 @@
       "classes": {
         "lcars-table": "Styled table; add .lcars-num to numeric <th>/<td> for right alignment."
       },
+      "a11y": "Wrap tables that can be wider than a phone in <div class=\"lcars-scroll\" tabindex=\"0\" aria-label=\"…\">.",
       "example": "<table class=\"lcars-table\">\n  <thead><tr><th>Officer</th><th class=\"lcars-num\">Shift</th></tr></thead>\n  <tbody><tr><td>Commander</td><td class=\"lcars-num\">0800</td></tr></tbody>\n</table>"
     },
     {
@@ -411,6 +416,12 @@
       "classes": {
         "lcars-pulse": "Brightness pulse (only without reduced motion).",
         "lcars-blink": "On/off blink (only without reduced motion)."
+      }
+    },
+    {
+      "group": "Overflow",
+      "classes": {
+        "lcars-scroll": "Horizontal scroll container for wide content such as tables; add tabindex=\"0\" and an aria-label."
       }
     },
     {
@@ -860,6 +871,12 @@
       "kind": "utility"
     },
     {
+      "class": "lcars-scroll",
+      "description": "Horizontal scroll container for wide content such as tables; add tabindex=\"0\" and an aria-label.",
+      "source": "utility:Overflow",
+      "kind": "utility"
+    },
+    {
       "class": "lcars-sr-only",
       "description": "Visually hidden, still read by screen readers.",
       "source": "utility:Accessibility",
@@ -1119,13 +1136,13 @@
     },
     {
       "class": "lcars-c-red",
-      "description": "Sets --lcars-c to the swatch #cc4444.",
+      "description": "Sets --lcars-c to the swatch #d04848.",
       "source": "utility:Color",
       "kind": "utility"
     },
     {
       "class": "lcars-text-red",
-      "description": "Text color: the swatch #cc4444.",
+      "description": "Text color: the swatch #d04848.",
       "source": "utility:Color",
       "kind": "utility"
     },
@@ -1303,7 +1320,7 @@
     },
     {
       "name": "--lcars-red",
-      "value": "#cc4444",
+      "value": "#d04848",
       "description": "",
       "group": "Palette"
     },

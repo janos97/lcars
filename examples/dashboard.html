@@ -26,9 +26,9 @@
           <dt>Ship time</dt><dd data-lcars-clock></dd>
           <dt>Condition</dt><dd id="condition" class="lcars-text-green">Green</dd>
         </dl>
-        <div class="lcars-stack" style="--lcars-space: .5rem; align-items: flex-end">
+        <div class="lcars-stack" style="--lcars-space: .5rem; align-items: flex-end; min-width: 0; max-width: 100%">
           <h1 class="lcars-title">Operations</h1>
-          <select class="lcars-input" data-lcars-theme-select aria-label="Theme" style="width: 17rem"></select>
+          <select class="lcars-input" data-lcars-theme-select aria-label="Theme" style="width: min(17rem, 100%)"></select>
         </div>
       </div>
       <div class="lcars-frame__elbow-bottom lcars-c-secondary"></div>
@@ -117,6 +117,7 @@
               <span class="lcars-block lcars-grow-6 lcars-c-tertiary"></span>
               <span class="lcars-block lcars-c-secondary lcars-round-end"></span>
             </div>
+            <div class="lcars-scroll" tabindex="0" aria-label="Away team table">
             <table class="lcars-table lcars-c-tertiary">
               <thead>
                 <tr><th>Officer</th><th>Department</th><th>Location</th><th>Status</th><th class="lcars-num">Vitals</th></tr>
@@ -128,6 +129,7 @@
                 <tr><td>Doctor</td><td>Medical</td><td>Transporter room 3</td><td><span class="lcars-pill lcars-pill--outline lcars-c-accent">Standby</span></td><td class="lcars-num">97</td></tr>
               </tbody>
             </table>
+            </div>
           </section>
 
         </div>

@@ -57,6 +57,7 @@ Files: `dist/lcars.css` (readable), `dist/lcars.min.css`, `dist/lcars.js` (ES mo
 | Meter width set in percent (`style="width: 70%"`) | `style="--lcars-value: .7"` (0–1) or `aria-valuenow` with `lcars.js`. |
 | Hand-written CSS for gaps, radii or fonts | Override the matching token (`--lcars-gap`, `--lcars-inner-radius`, `--lcars-font`). |
 | Nesting one `.lcars-app` inside another | Use a single `.lcars-app` per page; nest `.lcars-frame`s inside `__main` instead. |
+| A wide `.lcars-table` straight in the page (overflows phones) | Wrap it: `<div class="lcars-scroll" tabindex="0" aria-label="…">`. |
 | Opening a page that loads `lcars.js` from `file://` | Serve it over http (`npm run dev`, any static server). |
 
 ## Which component do I need?
@@ -347,6 +348,8 @@ Data table with colored header rule, row caps and hover highlight.
 | --- | --- |
 | `lcars-table` | Styled table; add .lcars-num to numeric <th>/<td> for right alignment. |
 
+**Accessibility:** Wrap tables that can be wider than a phone in <div class="lcars-scroll" tabindex="0" aria-label="…">.
+
 ```html
 <table class="lcars-table">
   <thead><tr><th>Officer</th><th class="lcars-num">Shift</th></tr></thead>
@@ -467,6 +470,12 @@ Small layout primitives. All use --lcars-space for spacing.
 | `lcars-pulse` | Brightness pulse (only without reduced motion). |
 | `lcars-blink` | On/off blink (only without reduced motion). |
 
+**Overflow**
+
+| Class | Description |
+| --- | --- |
+| `lcars-scroll` | Horizontal scroll container for wide content such as tables; add tabindex="0" and an aria-label. |
+
 **Accessibility**
 
 | Class | Description |
@@ -506,7 +515,7 @@ Override on `:root` for the whole app, or on any element for a subtree.
 | `--lcars-ice` | #99ccff | `lcars-c-ice` |
 | `--lcars-moonlight` | #ddddff | `lcars-c-moonlight` |
 | `--lcars-green` | #99cc66 | `lcars-c-green` |
-| `--lcars-red` | #cc4444 | `lcars-c-red` |
+| `--lcars-red` | #d04848 | `lcars-c-red` |
 | `--lcars-mars` | #ff2200 | `lcars-c-mars` |
 | `--lcars-tomato` | #ff5555 | `lcars-c-tomato` |
 | `--lcars-gray` | #8a8aa6 | `lcars-c-gray` |

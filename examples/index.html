@@ -29,7 +29,7 @@
         <h1 class="lcars-title">LCARS Component Library</h1>
         <div class="lcars-split">
           <div class="lcars-cluster">
-            <label class="lcars-field" style="min-width: 16rem">
+            <label class="lcars-field" style="width: min(16rem, 100%)">
               <span class="lcars-label">Theme</span>
               <select class="lcars-input" data-lcars-theme-select></select>
             </label>
@@ -271,6 +271,7 @@
         <section id="tables">
           <h2>Tables</h2>
           <div class="demo" data-demo>
+<div class="lcars-scroll" tabindex="0" aria-label="Duty roster">
 <table class="lcars-table">
   <caption>Duty roster</caption>
   <thead>
@@ -282,6 +283,7 @@
     <tr><td>Lieutenant</td><td>Tactical</td><td class="lcars-num">0000</td></tr>
   </tbody>
 </table>
+</div>
           </div>
         </section>
 
@@ -348,7 +350,7 @@
         <section id="javascript">
           <h2>JavaScript (optional)</h2>
           <p>The CSS stands alone. <code>lcars.js</code> is a ~9&nbsp;kB ES module that wires up data attributes and exposes a small API.</p>
-<pre><code>&lt;span data-lcars-clock&gt;&lt;/span&gt;            live clock ("hm" hides seconds)
+<pre tabindex="0"><code>&lt;span data-lcars-clock&gt;&lt;/span&gt;            live clock ("hm" hides seconds)
 &lt;span data-lcars-stardate&gt;&lt;/span&gt;         stardate, YYYY.DDD
 &lt;div class="lcars-data" data-lcars-cascade="48"&gt;&lt;/div&gt;
 &lt;button data-lcars-set-theme="ds9"&gt;        switch theme ("" = default)
@@ -408,6 +410,7 @@ LCARS.init(element);                       // upgrade content you rendered yours
         const lines = demo.innerHTML.replace(/^\n+|\s+$/g, "").split("\n");
         const indent = Math.min(...lines.filter((l) => l.trim()).map((l) => l.match(/^ */)[0].length));
         const pre = document.createElement("pre");
+        pre.tabIndex = 0; // scrollable regions must be keyboard reachable
         pre.innerHTML = `<code>${escape(lines.map((l) => l.slice(indent)).join("\n"))}</code>`;
         demo.after(pre);
       }

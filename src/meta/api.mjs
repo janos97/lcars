@@ -37,6 +37,7 @@ export const mistakes = [
   ["Meter width set in percent (`style=\"width: 70%\"`)", "`style=\"--lcars-value: .7\"` (0–1) or `aria-valuenow` with `lcars.js`."],
   ["Hand-written CSS for gaps, radii or fonts", "Override the matching token (`--lcars-gap`, `--lcars-inner-radius`, `--lcars-font`)."],
   ["Nesting one `.lcars-app` inside another", "Use a single `.lcars-app` per page; nest `.lcars-frame`s inside `__main` instead."],
+  ["A wide `.lcars-table` straight in the page (overflows phones)", "Wrap it: `<div class=\"lcars-scroll\" tabindex=\"0\" aria-label=\"…\">`."],
   ["Opening a page that loads `lcars.js` from `file://`", "Serve it over http (`npm run dev`, any static server)."],
 ];
 
@@ -262,6 +263,7 @@ export const components = [
     elements: "<table>",
     colorDefault: "tertiary",
     classes: { "lcars-table": "Styled table; add .lcars-num to numeric <th>/<td> for right alignment." },
+    a11y: "Wrap tables that can be wider than a phone in <div class=\"lcars-scroll\" tabindex=\"0\" aria-label=\"…\">.",
     example: `<table class="lcars-table">
   <thead><tr><th>Officer</th><th class="lcars-num">Shift</th></tr></thead>
   <tbody><tr><td>Commander</td><td class="lcars-num">0800</td></tr></tbody>
@@ -362,6 +364,10 @@ export const utilities = [
       "lcars-pulse": "Brightness pulse (only without reduced motion).",
       "lcars-blink": "On/off blink (only without reduced motion).",
     },
+  },
+  {
+    group: "Overflow",
+    classes: { "lcars-scroll": "Horizontal scroll container for wide content such as tables; add tabindex=\"0\" and an aria-label." },
   },
   {
     group: "Accessibility",

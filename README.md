@@ -153,6 +153,7 @@ The geometry is controlled by tokens: `--lcars-side` (sidebar width, fluid by de
 | Flex | `.lcars-grow`, `.lcars-grow-{0,2,3,4,6,8}` |
 | Text | `.lcars-upper`, `.lcars-num`, `.lcars-text-start`, `.lcars-text-center`, `.lcars-text-end` |
 | Motion | `.lcars-pulse`, `.lcars-blink` |
+| Overflow | `.lcars-scroll` (wrap wide tables; add `tabindex="0"`) |
 | Accessibility | `.lcars-sr-only` |
 
 **States:** `aria-current`, `aria-pressed="true"`, `aria-selected="true"` and `.is-active` all switch a block or button to `--lcars-active`. `disabled` and `aria-disabled="true"` dim it.
@@ -272,7 +273,8 @@ Current evergreen browsers: Chrome/Edge 111+, Firefox 121+ and Safari 16.4+. The
 npm install
 npm run dev     # http://localhost:4747/examples/ with rebuild-on-save
 npm run build   # src/ → dist/
-npm test        # generated files fresh, every class documented, token/theme consistency, class usage, JS
+npm test        # generated files fresh, every class documented, tokens/themes, contrast, class usage, JS
+npm run test:e2e  # Playwright: every example page — errors, overflow, geometry, themes, states, JS, axe a11y
 ```
 
 ```

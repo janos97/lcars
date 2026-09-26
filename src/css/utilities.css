@@ -104,6 +104,16 @@
   }
 }
 
+/* ── Overflow ──
+ * Wrap wide content (tables, code) so it scrolls instead of widening the
+ * page. Give the wrapper tabindex="0" so keyboard users can scroll it. */
+.lcars-scroll {
+  position: relative; /* contains absolutely positioned children, e.g. .lcars-sr-only */
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
 /* ── Accessibility ── */
 .lcars-sr-only {
   position: absolute;

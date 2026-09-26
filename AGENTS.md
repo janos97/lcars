@@ -22,7 +22,9 @@ The rules that matter most:
 
 ### Commands
 - `npm run build` — generates `dist/` **and** the docs (`docs/*.md`, `llms*.txt`, `dist/lcars.manifest.json`, `examples/recipes/`). Always run it before committing; everything it writes is committed and `npm test` fails if any of it is stale.
-- `npm test` — node:test suite: generated files fresh, every CSS class documented and every documented class real, token/theme consistency, class usage in examples/recipes/docs, JS helpers.
+- `npm test` — node:test suite: generated files fresh, every CSS class documented and every documented class real, token/theme consistency, WCAG contrast of every swatch and theme, class usage in examples/recipes/docs, JS helpers.
+- `npm run test:e2e` — Playwright suite over every page in `examples/`: loads without errors, font applied, no horizontal overflow on phones, frame geometry, themes and red alert, state styling, JS behaviour, and axe WCAG 2.1 A/AA. CI runs it on Chromium, Firefox, WebKit and a mobile profile; locally `npx playwright test --project=chromium --project=mobile`.
+- Before a PR: `npm run build && npm run test:all`, then fill in `.github/pull_request_template.md`.
 - `npm run dev` — static server on :4747 with rebuild-on-save. Pages need HTTP (ES module), not `file://`.
 
 ### Sources of truth (edit these, never the generated files)

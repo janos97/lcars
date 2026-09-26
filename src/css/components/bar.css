@@ -43,16 +43,22 @@
   font-size: var(--lcars-text-xs);
 }
 
-.lcars-bar__fixed,
-:is(.lcars-bar, .lcars-frame__bar-top, .lcars-frame__bar-bottom) > .lcars-bar__title {
+.lcars-bar__fixed {
   flex: 0 0 auto;
+}
+
+/* Titles keep their natural width but may shrink (with an ellipsis) so a
+ * bar never overflows a narrow screen. */
+:is(.lcars-bar, .lcars-frame__bar-top, .lcars-frame__bar-bottom) > .lcars-bar__title {
+  flex: 0 1 auto;
 }
 
 /* Text that sits in the bar, on the background, e.g. a page title. */
 .lcars-bar__title {
   --lcars-c: var(--lcars-heading);
-  display: flex;
-  align-items: center;
+  display: block;
+  align-self: center;
+  min-width: 0;
   margin: 0;
   padding-inline: calc(var(--lcars-gap) * 2);
   color: var(--lcars-c);
@@ -61,6 +67,8 @@
   font-weight: 500;
   line-height: 1;
   white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: clip;
   text-transform: var(--lcars-case);
 }
 

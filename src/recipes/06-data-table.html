@@ -8,23 +8,25 @@ summary: Table with a heading bar, status pills, numeric columns and row actions
     <span class="lcars-block lcars-c-tertiary lcars-grow-6"></span>
     <span class="lcars-block lcars-c-secondary lcars-round-end"></span>
   </div>
-  <table class="lcars-table">
-    <thead>
-      <tr><th>Name</th><th>Department</th><th>Status</th><th class="lcars-num">Hours</th><th><span class="lcars-sr-only">Actions</span></th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Commander</td><td>Command</td>
-        <td><span class="lcars-pill lcars-c-green">On duty</span></td>
-        <td class="lcars-num">1,204</td>
-        <td><button class="lcars-button lcars-button--sm lcars-c-accent" type="button">Open</button></td>
-      </tr>
-      <tr>
-        <td>Lieutenant</td><td>Security</td>
-        <td><span class="lcars-pill lcars-c-alert">Missing</span></td>
-        <td class="lcars-num">873</td>
-        <td><button class="lcars-button lcars-button--sm lcars-c-accent" type="button">Open</button></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="lcars-scroll" tabindex="0" aria-label="Crew manifest table">
+    <table class="lcars-table">
+      <thead>
+        <tr><th>Name</th><th>Department</th><th>Status</th><th class="lcars-num">Hours</th><th><span class="lcars-sr-only">Actions</span></th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Commander</td><td>Command</td>
+          <td><span class="lcars-pill lcars-c-green">On duty</span></td>
+          <td class="lcars-num">1,204</td>
+          <td><button class="lcars-button lcars-button--sm lcars-c-accent" type="button">Open</button></td>
+        </tr>
+        <tr>
+          <td>Lieutenant</td><td>Security</td>
+          <td><span class="lcars-pill lcars-c-alert">Missing</span></td>
+          <td class="lcars-num">873</td>
+          <td><button class="lcars-button lcars-button--sm lcars-c-accent" type="button">Open</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </section>
