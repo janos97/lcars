@@ -141,6 +141,7 @@ The geometry is controlled by tokens: `--lcars-side` (sidebar width, fluid by de
 | `.lcars-input` | `input`, `select` or `textarea`. | `aria-invalid="true"` switches it to the alert color |
 | `.lcars-check` / `.lcars-switch` / `.lcars-range` | Checkbox or radio, toggle switch, and slider. | Wrap in `.lcars-choice` to pair with text |
 | `.lcars-dialog` | Native `<dialog>` styled as a modal. Open with `showModal()`. | `--lcars-dialog-width` |
+| `.lcars-svg` | Inline SVG whose shapes take `.lcars-c-*` colors and themes; shapes with `role="button"` act as controls. | See the `svg-control` recipe |
 
 **Layout:** `.lcars-app` (full-page column of frames; the last one grows), `.lcars-stack`, `.lcars-cluster`, `.lcars-split`, `.lcars-grid` (auto-fit; tune with `--lcars-grid-min`), and `.lcars-span-all`. They all space with `--lcars-space`.
 
@@ -223,14 +224,15 @@ The colors are fan interpretations, tuned so black text on colored pieces stays 
 | `data-lcars-set-theme="ds9"` | Switches theme on click. `""` restores the default. |
 | `data-lcars-theme-select` | On a `<select>`: fills itself with every theme and switches on change. |
 | `data-lcars-toggle-alert` | Toggles red alert on click. |
-| `data-lcars-sound[="tap\|confirm\|deny"]` | On an ancestor: clicks on interactive children beep. Use `data-lcars-tone` on a child to override the tone. |
+| `data-lcars-sound[="tap\|confirm\|deny\|alert\|red-alert\|ready"]` | On an ancestor: clicks on interactive children play a sound (entering red alert plays `red-alert`). Use `data-lcars-tone` on a child to override it. |
 | `.lcars-meter[aria-valuenow]` | Keeps `--lcars-value` in sync with the ARIA attributes. |
 
 ```js
 import LCARS from "lcars/lcars.js";     // also exposed as window.LCARS
 LCARS.setTheme("voy");                   // (id, element = <html>); ids in LCARS.THEMES
 LCARS.setAlert(true);                    // red alert; setAlert() toggles
-LCARS.beep("confirm");
+LCARS.beep("confirm");                   // tap | confirm | deny | alert | red-alert | ready
+LCARS.setSounds({ "red-alert": "/sfx/klaxon.ogg" }); // optional: your own audio files
 LCARS.init(someElement);                 // upgrade content you rendered
 LCARS.stardate(); LCARS.clock();         // pure helpers
 // Events: "lcars:theme" and "lcars:alert" bubble from the element that changed.
@@ -300,6 +302,7 @@ Generated files are committed so the CDN, git installs and AI tools can read the
 
 ## Credits and legal
 
-- The original concept and code are by [Garrett-](https://github.com/Garrett-/lcars), under the MIT license.
+- This is a fork of [Garrett-/lcars](https://github.com/Garrett-/lcars) (MIT). The original concept and code are by Garrett-; the 2020 upstream rewrite is by Jörn Weißenborn, with audio and SVG work by Justin Warwick and fixes by xenziffen (see `AUTHORS` and `LICENSE`). This fork is a fresh implementation; from upstream it adapts the semantic sound events and the SVG control (geometry of the X/Y widget) into its own architecture.
+- Sounds are synthesized in the browser; no audio recordings are bundled. Use `LCARS.setSounds()` with audio you have the rights to.
 - The [Antonio](https://github.com/googlefonts/antonioFont) typeface is bundled under the SIL Open Font License 1.1 (`src/fonts/OFL.txt`).
 - LCARS and Star Trek are trademarks of CBS Studios / Paramount. This is an unofficial fan project, not affiliated with or endorsed by them.

@@ -115,6 +115,14 @@
       "use": "`<dialog class=\"lcars-dialog\">` wrapping a bracket or frame (recipe: dialog)"
     },
     {
+      "need": "Custom shapes or a widget (e.g. the circular X/Y control)",
+      "use": "Inline `<svg class=\"lcars-svg\">` with `.lcars-c-*` on shapes and `role=\"button\"` on clickable ones (recipe: svg-control)"
+    },
+    {
+      "need": "Console sounds",
+      "use": "`data-lcars-sound` on a container; `LCARS.beep(\"alert\")`; your own files via `LCARS.setSounds({...})`"
+    },
+    {
       "need": "Tabular data",
       "use": "`.lcars-table` with `.lcars-num` numeric cells and `.lcars-pill` statuses (recipe: data-table)"
     },
@@ -359,6 +367,20 @@
         "--lcars-dialog-width": "Maximum width (default 40rem)."
       },
       "example": "<dialog class=\"lcars-dialog\" id=\"confirm\">\n  <form method=\"dialog\" class=\"lcars-bracket lcars-c-alert\">\n    <h3>Confirm self-destruct</h3>\n    <button class=\"lcars-button lcars-c-alert\" value=\"yes\">Confirm</button>\n  </form>\n</dialog>"
+    },
+    {
+      "id": "svg",
+      "name": "SVG",
+      "category": "Components",
+      "summary": "Inline SVG that follows LCARS colors, themes and states — for shapes CSS boxes can't draw, such as the circular X/Y control. Shapes without a fill attribute are painted with --lcars-c.",
+      "elements": "<svg> (inline, not <img>)",
+      "colorDefault": "primary",
+      "classes": {
+        "lcars-svg": "On the <svg>. Paints path/rect/circle/ellipse/polygon/polyline with --lcars-c (so .lcars-c-* works on shapes) and styles shapes with role=\"button\" as controls."
+      },
+      "states": "role=\"button\" shapes: hover/active brightness, focus ring (stroke), aria-pressed/aria-selected/aria-current → active color, aria-disabled=\"true\" → dimmed.",
+      "a11y": "Give the <svg> role=\"group\" and an aria-label; give each clickable shape role=\"button\", tabindex=\"0\" and an aria-label. lcars.js makes Enter/Space click them.",
+      "example": "<svg class=\"lcars-svg\" viewBox=\"0 0 80 80\" width=\"160\" role=\"group\" aria-label=\"Scanner\">\n  <path class=\"lcars-c-accent\" role=\"button\" tabindex=\"0\" aria-label=\"Up\" d=\"m34 10h12v-9.5c-3.9-.5-8-.5-12 0z\"/>\n  <path class=\"lcars-c-tertiary\" d=\"m11 34v12h23v23h12v-23h23v-12h-23v-23h-12v23z\"/>\n</svg>"
     },
     {
       "id": "layout",
@@ -730,6 +752,12 @@
       "class": "lcars-dialog",
       "description": "Black modal surface with dark backdrop; put a bracket or frame inside.",
       "source": "dialog",
+      "kind": "block"
+    },
+    {
+      "class": "lcars-svg",
+      "description": "On the <svg>. Paints path/rect/circle/ellipse/polygon/polyline with --lcars-c (so .lcars-c-* works on shapes) and styles shapes with role=\"button\" as controls.",
+      "source": "svg",
       "kind": "block"
     },
     {
@@ -1863,14 +1891,19 @@
       "effect": "Toggles red alert on click."
     },
     {
-      "attribute": "data-lcars-sound=\"tap|confirm|deny\"",
+      "attribute": "data-lcars-sound=\"tap|confirm|deny|alert|red-alert|ready\"",
       "on": "ancestor element",
-      "effect": "Clicks on interactive descendants beep; \"off\" disables."
+      "effect": "Clicks on interactive descendants play that sound (default tap; entering red alert plays red-alert); \"off\" disables."
     },
     {
-      "attribute": "data-lcars-tone=\"tap|confirm|deny\"",
+      "attribute": "data-lcars-tone=\"…\"",
       "on": "interactive element",
-      "effect": "Overrides the beep tone for that element."
+      "effect": "Overrides the sound for that element."
+    },
+    {
+      "attribute": "role=\"button\" inside .lcars-svg",
+      "on": "SVG shape",
+      "effect": "Enter / Space activate it like a button."
     },
     {
       "attribute": "aria-valuenow / -min / -max",
@@ -1898,7 +1931,15 @@
     },
     {
       "member": "beep(tone = \"tap\", { volume })",
-      "description": "Play a synthesized console tone: \"tap\", \"confirm\" or \"deny\"."
+      "description": "Play a console sound: tap (acknowledge), confirm (alternate acknowledge), deny (negative acknowledge), alert, red-alert or ready. Synthesized unless setSounds() gave it a file."
+    },
+    {
+      "member": "setSounds({ tone: url | null })",
+      "description": "Use your own audio files for any sound, e.g. setSounds({ \"red-alert\": \"/sfx/klaxon.ogg\" }); null restores the synthesized one."
+    },
+    {
+      "member": "SOUNDS",
+      "description": "Array of the built-in sound names."
     },
     {
       "member": "stardate(date = new Date())",
@@ -2001,6 +2042,14 @@
       "page": false,
       "source": "src/recipes/09-dialog.html",
       "live": "examples/recipes/dialog.html"
+    },
+    {
+      "id": "svg-control",
+      "title": "SVG control",
+      "summary": "The classic circular X/Y control as inline SVG — shapes colored with .lcars-c-* classes, each quadrant and arrow a keyboard-accessible button. Geometry adapted from upstream's widget by jrwarwick (MIT).",
+      "page": false,
+      "source": "src/recipes/10-svg-control.html",
+      "live": "examples/recipes/svg-control.html"
     }
   ]
 }

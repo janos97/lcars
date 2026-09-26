@@ -11,7 +11,9 @@
  *   data-lcars-theme-select     on a <select>: lists every theme and switches on change
  *   data-lcars-toggle-alert     click to toggle red alert
  *   data-lcars-sound            on any ancestor: interactive children beep
- *                               (value picks the tone: tap | confirm | deny)
+ *                               (tap | confirm | deny | alert | red-alert | ready)
+ *   data-lcars-tone="x"         per-element tone override
+ *   .lcars-svg [role=button]    SVG controls get Enter/Space activation
  *   .lcars-meter[aria-valuenow] --lcars-value is kept in sync automatically
  *
  * Loading the module auto-initialises the page and watches for elements
@@ -72,24 +74,59 @@ export function randomReadout(random = Math.random) {
 
 /* ── Sound ────────────────────────────────────────────────── */
 
+// Semantic console sounds (the event set follows upstream's lcars_audio.js):
+// tap = acknowledge, confirm = alternate acknowledge, deny = negative
+// acknowledge, alert, red-alert and ready. Each is synthesized, so no audio
+// files ship with the framework; setSounds() swaps in your own samples.
+// Segments are [hz, seconds] or [fromHz, toHz, seconds] for a sweep.
 const TONES = {
   tap: [[1400, 0.06]],
   confirm: [[1000, 0.06], [1500, 0.08]],
   deny: [[420, 0.1], [300, 0.14]],
+  alert: [[880, 0.12], [660, 0.12], [880, 0.12], [660, 0.12]],
+  "red-alert": [[380, 900, 0.45], [380, 900, 0.45]],
+  ready: [[700, 0.05], [1050, 0.05], [1400, 0.09]],
 };
+
+/** Names of the built-in tones. */
+export const SOUNDS = Object.freeze(Object.keys(TONES));
+
+const samples = new Map(); // tone → { url, el }
 let audio;
 
-/** Play a short synthesized console tone. Silently no-ops without Web Audio. */
+/**
+ * Use your own audio files instead of the synthesized tones, e.g.
+ * setSounds({ tap: "/sfx/tap.ogg", "red-alert": "/sfx/klaxon.ogg" }).
+ * Pass null for a tone to go back to its synthesized version.
+ */
+export function setSounds(map) {
+  for (const [tone, url] of Object.entries(map)) {
+    if (url) samples.set(tone, { url, el: null });
+    else samples.delete(tone);
+  }
+}
+
+/** Play a console sound. Silently no-ops where audio is unavailable or blocked. */
 export function beep(tone = "tap", { volume = 0.04 } = {}) {
-  const Ctx = typeof window !== "undefined" && (window.AudioContext || window.webkitAudioContext);
+  if (typeof window === "undefined") return;
+  const sample = samples.get(tone);
+  if (sample && typeof Audio === "function") {
+    sample.el ??= new Audio(sample.url);
+    sample.el.currentTime = 0;
+    sample.el.play()?.catch?.(() => {});
+    return;
+  }
+  const Ctx = window.AudioContext || window.webkitAudioContext;
   if (!Ctx) return;
   audio ??= new Ctx();
   let t = audio.currentTime;
-  for (const [freq, dur] of TONES[tone] ?? TONES.tap) {
+  for (const segment of TONES[tone] ?? TONES.tap) {
+    const [from, to, dur] = segment.length === 3 ? segment : [segment[0], segment[0], segment[1]];
     const osc = audio.createOscillator();
     const gain = audio.createGain();
     osc.type = "sine";
-    osc.frequency.value = freq;
+    osc.frequency.setValueAtTime(from, t);
+    if (to !== from) osc.frequency.linearRampToValueAtTime(to, t + dur);
     gain.gain.setValueAtTime(volume, t);
     gain.gain.exponentialRampToValueAtTime(0.0001, t + dur);
     osc.connect(gain).connect(audio.destination);
@@ -253,13 +290,27 @@ function onClick(event) {
   const themeBtn = target.closest("[data-lcars-set-theme]");
   if (themeBtn) setTheme(themeBtn.dataset.lcarsSetTheme);
 
-  if (target.closest("[data-lcars-toggle-alert]")) setAlert();
+  const alertBtn = target.closest("[data-lcars-toggle-alert]");
+  const alertOn = alertBtn ? setAlert() : null;
 
   const soundScope = target.closest("[data-lcars-sound]");
   const interactive = target.closest("a[href], button, [role='button'], summary, label, input, select");
-  if (soundScope && interactive && soundScope.dataset.lcarsSound !== "off" && !interactive.matches(":disabled")) {
-    beep(interactive.dataset.lcarsTone || soundScope.dataset.lcarsSound || "tap");
+  if (soundScope && interactive && soundScope.dataset.lcarsSound !== "off" && !isDisabled(interactive)) {
+    const fallback = alertOn === true ? "red-alert" : soundScope.dataset.lcarsSound || "tap";
+    beep(interactive.dataset.lcarsTone || fallback);
   }
+}
+
+const isDisabled = (el) => el.matches(":disabled, [aria-disabled='true']");
+
+// SVG shapes can't be <button>s, so .lcars-svg shapes with role="button"
+// get the keyboard behaviour a button has: Enter or Space clicks them.
+function onKeydown(event) {
+  const el = event.target;
+  if (!(el instanceof Element) || !el.matches(".lcars-svg [role='button']")) return;
+  if (event.key !== "Enter" && event.key !== " ") return;
+  event.preventDefault();
+  if (!isDisabled(el)) el.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
 }
 
 function onChange(event) {
@@ -283,6 +334,7 @@ export function init(scope = document) {
   if (!listening) {
     document.addEventListener("click", onClick);
     document.addEventListener("change", onChange);
+    document.addEventListener("keydown", onKeydown);
     listening = true;
   }
   upgrade(scope);
@@ -301,6 +353,6 @@ if (hasDOM && !document.documentElement.hasAttribute("data-lcars-manual")) {
   else start();
 }
 
-const LCARS = { init, setTheme, setAlert, beep, stardate, clock, randomReadout, THEMES };
+const LCARS = { init, setTheme, setAlert, beep, setSounds, SOUNDS, stardate, clock, randomReadout, THEMES };
 if (typeof window !== "undefined") window.LCARS ??= LCARS;
 export default LCARS;
