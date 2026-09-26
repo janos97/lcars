@@ -1,0 +1,225 @@
+/*
+ * The LCARS frame — the sidebar + elbow + bar construction that makes a
+ * page look like LCARS. Every part is optional; include the ones you need.
+ *
+ *   ┌───────────╮  ▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀  ← __bar-top    (row of segments)
+ *   │__elbow-top│╭
+ *   │           ││  __main
+ *   ├───────────┤│  (your content)
+ *   │  __side   ││
+ *   ├───────────┤│
+ *   │__elbow-   │╰
+ *   └──bottom───╯  ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ← __bar-bottom
+ *
+ *   <section class="lcars-frame">
+ *     <div class="lcars-frame__elbow-top">label</div>
+ *     <div class="lcars-frame__bar-top"> …segments… </div>
+ *     <nav class="lcars-frame__side"> …blocks… </nav>
+ *     <div class="lcars-frame__main"> …content… </div>
+ *     <div class="lcars-frame__elbow-bottom">label</div>
+ *     <div class="lcars-frame__bar-bottom"> …segments… </div>
+ *   </section>
+ *
+ * Omit the top pieces for a "header" frame, omit the bottom pieces for a
+ * "body" frame. Add .lcars-frame--right to put the sidebar on the right.
+ *
+ * Elbows are drawn with backgrounds only (no masks, no images) and are
+ * transparent outside their shape, so frames work on any background.
+ * Their color comes from --lcars-c, inherited from the frame.
+ */
+
+.lcars-frame {
+  --lcars-c: var(--lcars-primary);
+  display: grid;
+  grid-template-columns: var(--lcars-side) minmax(0, 1fr);
+  grid-template-rows: auto auto 1fr auto auto;
+  grid-template-areas:
+    "elbow-top    bar-top"
+    "elbow-top    main"
+    "side         main"
+    "elbow-bottom main"
+    "elbow-bottom bar-bottom";
+  min-width: 0;
+}
+
+.lcars-frame--right {
+  grid-template-columns: minmax(0, 1fr) var(--lcars-side);
+  grid-template-areas:
+    "bar-top    elbow-top"
+    "main       elbow-top"
+    "main       side"
+    "main       elbow-bottom"
+    "bar-bottom elbow-bottom";
+}
+
+/* ── Elbows ───────────────────────────────────────────────── */
+
+.lcars-frame__elbow-top,
+.lcars-frame__elbow-bottom {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  min-height: var(--lcars-elbow-height);
+  padding: var(--lcars-gap) calc(var(--lcars-gap) * 2);
+  background-color: var(--lcars-c);
+  color: var(--lcars-on-c);
+  font-family: var(--lcars-font);
+  font-size: var(--lcars-text-sm);
+  line-height: 1;
+  letter-spacing: var(--lcars-tracking);
+  text-align: end;
+  text-decoration: none;
+  text-transform: var(--lcars-case);
+}
+
+.lcars-frame__elbow-top {
+  grid-area: elbow-top;
+  align-items: flex-end;
+  border-top-left-radius: var(--lcars-elbow-rx) 100%;
+}
+
+.lcars-frame__elbow-bottom {
+  grid-area: elbow-bottom;
+  align-items: flex-start;
+  border-bottom-left-radius: var(--lcars-elbow-rx) 100%;
+}
+
+/* The arm that reaches into the bar row, including the concave fillet. */
+.lcars-frame__elbow-top::after,
+.lcars-frame__elbow-bottom::after {
+  --_r: var(--lcars-inner-radius);
+  content: "";
+  position: absolute;
+  left: 100%;
+  width: var(--lcars-elbow-reach);
+  height: calc(var(--lcars-bar) + var(--_r));
+  pointer-events: none;
+}
+
+.lcars-frame__elbow-top::after {
+  top: 0;
+  background:
+    radial-gradient(circle at 100% 100%, transparent calc(var(--_r) - 0.5px), var(--lcars-c) var(--_r)) left bottom / var(--_r) var(--_r) no-repeat,
+    linear-gradient(var(--lcars-c) 0 0) left top / 100% var(--lcars-bar) no-repeat;
+}
+
+.lcars-frame__elbow-bottom::after {
+  bottom: 0;
+  background:
+    radial-gradient(circle at 100% 0, transparent calc(var(--_r) - 0.5px), var(--lcars-c) var(--_r)) left top / var(--_r) var(--_r) no-repeat,
+    linear-gradient(var(--lcars-c) 0 0) left bottom / 100% var(--lcars-bar) no-repeat;
+}
+
+/* Mirrored elbows */
+.lcars-frame--right > .lcars-frame__elbow-top,
+.lcars-frame--right > .lcars-frame__elbow-bottom {
+  justify-content: flex-start;
+  text-align: start;
+}
+
+.lcars-frame--right > .lcars-frame__elbow-top {
+  border-top-left-radius: 0;
+  border-top-right-radius: var(--lcars-elbow-rx) 100%;
+}
+
+.lcars-frame--right > .lcars-frame__elbow-bottom {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: var(--lcars-elbow-rx) 100%;
+}
+
+.lcars-frame--right > .lcars-frame__elbow-top::after,
+.lcars-frame--right > .lcars-frame__elbow-bottom::after {
+  left: auto;
+  right: 100%;
+}
+
+.lcars-frame--right > .lcars-frame__elbow-top::after {
+  background:
+    radial-gradient(circle at 0 100%, transparent calc(var(--_r) - 0.5px), var(--lcars-c) var(--_r)) right bottom / var(--_r) var(--_r) no-repeat,
+    linear-gradient(var(--lcars-c) 0 0) right top / 100% var(--lcars-bar) no-repeat;
+}
+
+.lcars-frame--right > .lcars-frame__elbow-bottom::after {
+  background:
+    radial-gradient(circle at 0 0, transparent calc(var(--_r) - 0.5px), var(--lcars-c) var(--_r)) right top / var(--_r) var(--_r) no-repeat,
+    linear-gradient(var(--lcars-c) 0 0) right bottom / 100% var(--lcars-bar) no-repeat;
+}
+
+/* Clickable elbows */
+a.lcars-frame__elbow-top,
+a.lcars-frame__elbow-bottom,
+button.lcars-frame__elbow-top,
+button.lcars-frame__elbow-bottom {
+  border: 0;
+  cursor: pointer;
+  transition: filter var(--lcars-duration) ease;
+}
+
+:is(a, button):is(.lcars-frame__elbow-top, .lcars-frame__elbow-bottom):hover {
+  filter: brightness(1.15);
+}
+
+/* ── Bars ─────────────────────────────────────────────────── */
+
+.lcars-frame__bar-top,
+.lcars-frame__bar-bottom {
+  margin-left: calc(var(--lcars-elbow-reach) + var(--lcars-gap));
+}
+
+.lcars-frame__bar-top {
+  grid-area: bar-top;
+  align-self: start;
+}
+
+.lcars-frame__bar-bottom {
+  grid-area: bar-bottom;
+  align-self: end;
+}
+
+.lcars-frame--right > .lcars-frame__bar-top,
+.lcars-frame--right > .lcars-frame__bar-bottom {
+  margin-left: 0;
+  margin-right: calc(var(--lcars-elbow-reach) + var(--lcars-gap));
+}
+
+/* ── Sidebar ──────────────────────────────────────────────── */
+
+.lcars-frame__side {
+  grid-area: side;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcars-gap);
+  min-height: 0;
+  padding-block: var(--lcars-gap);
+}
+
+.lcars-frame__side > * {
+  flex: none;
+}
+
+.lcars-frame__side > .lcars-grow {
+  flex: 1 1 auto;
+}
+
+/* Only the very first/last piece touches an elbow, so trim that gap. */
+.lcars-frame:not(:has(> .lcars-frame__elbow-top)) > .lcars-frame__side {
+  padding-top: 0;
+}
+
+.lcars-frame:not(:has(> .lcars-frame__elbow-bottom)) > .lcars-frame__side {
+  padding-bottom: 0;
+}
+
+/* ── Content ──────────────────────────────────────────────── */
+
+.lcars-frame__main {
+  grid-area: main;
+  min-width: 0;
+  padding: var(--lcars-frame-pad, 1rem);
+  padding-right: 0;
+}
+
+.lcars-frame--right > .lcars-frame__main {
+  padding-left: 0;
+  padding-right: var(--lcars-frame-pad, 1rem);
+}

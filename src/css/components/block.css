@@ -1,0 +1,81 @@
+/*
+ * .lcars-block — the basic LCARS rectangle: a solid colored panel with its
+ * label tucked into the bottom-right corner. Used for sidebar items, bar
+ * segments and anywhere else a colored slab is needed. Works as <div>,
+ * <a> or <button>.
+ *
+ *   <a class="lcars-block lcars-c-violet" href="#">Sensors</a>
+ */
+
+.lcars-block {
+  --lcars-c: var(--lcars-primary);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  min-height: var(--lcars-block-height);
+  margin: 0;
+  padding: var(--lcars-gap) calc(var(--lcars-gap) * 2);
+  border: 0;
+  border-radius: 0;
+  background-color: var(--lcars-c);
+  color: var(--lcars-on-c);
+  font-family: var(--lcars-font);
+  font-size: var(--lcars-text-sm);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: var(--lcars-tracking);
+  text-align: end;
+  text-decoration: none;
+  text-transform: var(--lcars-case);
+}
+
+.lcars-block--short { min-height: calc(var(--lcars-block-height) * 0.6); }
+.lcars-block--tall { min-height: calc(var(--lcars-block-height) * 2); }
+.lcars-block--top { align-items: flex-start; }
+.lcars-block--start { justify-content: flex-start; text-align: start; }
+.lcars-block--center { align-items: center; justify-content: center; text-align: center; }
+
+/* ── Shared interaction states for blocks and buttons ─────── */
+
+:is(a, button, label).lcars-block,
+.lcars-button {
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: filter var(--lcars-duration) ease, background-color var(--lcars-duration) ease;
+}
+
+:is(a, button, label).lcars-block:hover:not(:disabled, [aria-disabled="true"]),
+.lcars-button:hover:not(:disabled, [aria-disabled="true"]) {
+  filter: brightness(1.18);
+}
+
+:is(a, button, label).lcars-block:active:not(:disabled, [aria-disabled="true"]),
+.lcars-button:active:not(:disabled, [aria-disabled="true"]) {
+  filter: brightness(0.8);
+}
+
+:is(a, button, label).lcars-block:focus-visible,
+.lcars-button:focus-visible {
+  outline: 2px solid var(--lcars-focus);
+  outline-offset: 2px;
+}
+
+:is(.lcars-block, .lcars-button):is(:disabled, [aria-disabled="true"]) {
+  cursor: not-allowed;
+  filter: saturate(0.3) brightness(0.55);
+}
+
+/* A number or code set on a black plate inside a block or button:
+ *   <button class="lcars-button">Engage <span class="lcars-addon">47</span></button> */
+.lcars-addon {
+  display: inline-flex;
+  align-items: center;
+  align-self: stretch;
+  margin-block: calc(var(--lcars-gap) * -1);
+  padding-inline: 0.4em;
+  background-color: var(--lcars-bg);
+  color: var(--lcars-c, var(--lcars-primary));
+  font-size: 1.3em;
+  font-variant-numeric: tabular-nums;
+}

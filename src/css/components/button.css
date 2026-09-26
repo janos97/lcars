@@ -1,0 +1,60 @@
+/*
+ * .lcars-button — pill-shaped control. Use on <button> or <a>.
+ * Shape it with .lcars-round-start / .lcars-round-end / .lcars-square,
+ * size it with --sm / --lg, color it with .lcars-c-*.
+ *
+ *   <button class="lcars-button">Engage</button>
+ *   <a class="lcars-button lcars-round-end lcars-c-ice" href="#">Log</a>
+ */
+
+.lcars-button {
+  --lcars-c: var(--lcars-primary);
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 0.5em;
+  min-width: var(--lcars-button-width, 7.5rem);
+  min-height: var(--lcars-control);
+  margin: 0;
+  padding: 0.35em 1.1em;
+  border: 0;
+  border-radius: var(--lcars-pill);
+  background-color: var(--lcars-c);
+  color: var(--lcars-on-c);
+  font-family: var(--lcars-font);
+  font-size: var(--lcars-text-base);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: var(--lcars-tracking);
+  text-align: end;
+  text-decoration: none;
+  text-transform: var(--lcars-case);
+  vertical-align: middle;
+}
+
+.lcars-button--sm {
+  --lcars-control: 2rem;
+  min-width: 5rem;
+  font-size: var(--lcars-text-sm);
+}
+
+.lcars-button--lg {
+  --lcars-control: 3.75rem;
+  min-width: 10rem;
+  font-size: var(--lcars-text-lg);
+}
+
+.lcars-button--block {
+  display: flex;
+  width: 100%;
+}
+
+.lcars-button--center {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.lcars-button > .lcars-addon {
+  margin-block: -0.35em;
+}

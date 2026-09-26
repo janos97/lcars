@@ -1,0 +1,24 @@
+<!--
+title: Tabs
+summary: Segmented control / tabs built from small buttons with role="tab" and aria-selected; a few lines of JS switch panels.
+-->
+<div class="lcars-stack">
+  <div class="lcars-cluster" role="tablist" aria-label="Scan mode">
+    <button class="lcars-button lcars-button--sm lcars-round-start" role="tab" aria-selected="true" aria-controls="tab-a" id="t-a">Short range</button>
+    <button class="lcars-button lcars-button--sm lcars-square lcars-c-secondary" role="tab" aria-selected="false" aria-controls="tab-b" id="t-b">Long range</button>
+    <button class="lcars-button lcars-button--sm lcars-round-end lcars-c-tertiary" role="tab" aria-selected="false" aria-controls="tab-c" id="t-c">Subspace</button>
+  </div>
+  <div role="tabpanel" id="tab-a" aria-labelledby="t-a"><p>Short range results.</p></div>
+  <div role="tabpanel" id="tab-b" aria-labelledby="t-b" hidden><p>Long range results.</p></div>
+  <div role="tabpanel" id="tab-c" aria-labelledby="t-c" hidden><p>Subspace results.</p></div>
+</div>
+<script>
+  for (const tab of document.querySelectorAll('[role="tab"]')) {
+    tab.addEventListener("click", () => {
+      for (const t of tab.parentElement.children) {
+        t.setAttribute("aria-selected", t === tab);
+        document.getElementById(t.getAttribute("aria-controls")).hidden = t !== tab;
+      }
+    });
+  }
+</script>

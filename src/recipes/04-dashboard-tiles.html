@@ -1,0 +1,26 @@
+<!--
+title: Dashboard tiles
+summary: Grid of bracket cards showing KPIs with readouts and meters. Put this inside a frame's __main.
+-->
+<div class="lcars-grid" style="--lcars-grid-min: 16rem">
+  <section class="lcars-bracket" aria-labelledby="t1">
+    <h3 id="t1">Power</h3>
+    <dl class="lcars-readout">
+      <dt>Output</dt><dd>1.21 GW</dd>
+      <dt>Efficiency</dt><dd>94%</dd>
+    </dl>
+    <div class="lcars-meter" role="meter" aria-label="Load" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="--lcars-value: .72"></div>
+  </section>
+  <section class="lcars-bracket lcars-c-tertiary" aria-labelledby="t2">
+    <h3 id="t2">Crew</h3>
+    <dl class="lcars-readout">
+      <dt>On duty</dt><dd>412</dd>
+      <dt>Off duty</dt><dd>602</dd>
+    </dl>
+    <span class="lcars-pill lcars-c-green">Nominal</span>
+  </section>
+  <section class="lcars-bracket lcars-c-accent" aria-labelledby="t3">
+    <h3 id="t3">Sensors</h3>
+    <div class="lcars-data" data-lcars-cascade="24" style="--lcars-data-cols: 4"></div>
+  </section>
+</div>

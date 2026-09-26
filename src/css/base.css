@@ -1,0 +1,101 @@
+/*
+ * Base styles. Components work anywhere, but page-level typography only
+ * applies inside an element with class="lcars" (usually <html> or <body>),
+ * so the framework can be dropped into an existing app piece by piece.
+ */
+
+/* Every LCARS component sizes with border-box, wherever it is used. */
+:where([class^="lcars-"], [class*=" lcars-"]),
+:where([class^="lcars-"], [class*=" lcars-"])::before,
+:where([class^="lcars-"], [class*=" lcars-"])::after {
+  box-sizing: border-box;
+}
+
+.lcars {
+  color-scheme: dark;
+  background-color: var(--lcars-bg);
+  color: var(--lcars-fg);
+  font-family: var(--lcars-font);
+  font-size: var(--lcars-text-base);
+  line-height: 1.35;
+  letter-spacing: var(--lcars-tracking);
+  accent-color: var(--lcars-primary);
+  scrollbar-color: var(--lcars-muted) transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+:where(.lcars) *,
+:where(.lcars) *::before,
+:where(.lcars) *::after {
+  box-sizing: border-box;
+}
+
+:where(body.lcars, .lcars body) {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+:where(.lcars) :where(h1, h2, h3, h4, h5, h6) {
+  margin: 0 0 0.5em;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--lcars-heading);
+  text-transform: var(--lcars-case);
+}
+
+:where(.lcars) h1 { font-size: var(--lcars-text-3xl); }
+:where(.lcars) h2 { font-size: var(--lcars-text-2xl); }
+:where(.lcars) h3 { font-size: var(--lcars-text-xl); }
+:where(.lcars) h4 { font-size: var(--lcars-text-lg); }
+:where(.lcars) h5 { font-size: var(--lcars-text-base); }
+:where(.lcars) h6 { font-size: var(--lcars-text-sm); }
+
+:where(.lcars) :where(p, ul, ol, dl, pre, blockquote, figure) {
+  margin: 0 0 1em;
+}
+
+:where(.lcars) a {
+  color: var(--lcars-link);
+  text-underline-offset: 0.2em;
+}
+
+:where(.lcars) :where(code, kbd, samp, pre) {
+  font-family: var(--lcars-font-mono);
+  font-size: 0.85em;
+  letter-spacing: 0;
+}
+
+:where(.lcars) pre {
+  overflow: auto;
+  padding: 1rem;
+  border-inline-start: 0.5rem solid var(--lcars-muted);
+  background: color-mix(in srgb, var(--lcars-muted) 12%, var(--lcars-bg));
+}
+
+:where(.lcars) hr {
+  height: var(--lcars-gap);
+  margin: 1.5rem 0;
+  border: 0;
+  background: var(--lcars-muted);
+}
+
+:where(.lcars) :focus-visible {
+  outline: 2px solid var(--lcars-focus);
+  outline-offset: 2px;
+}
+
+:where(.lcars) ::selection {
+  background: var(--lcars-primary);
+  color: var(--lcars-on-c);
+}
+
+@keyframes lcars-pulse {
+  50% { filter: brightness(0.45); }
+}
+
+@keyframes lcars-blink {
+  50% { opacity: 0; }
+}

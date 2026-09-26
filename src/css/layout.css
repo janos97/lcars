@@ -1,0 +1,60 @@
+/*
+ * Page-level layout helpers.
+ *
+ *   .lcars-app      full-viewport column of frames (last frame grows)
+ *   .lcars-stack    vertical rhythm
+ *   .lcars-cluster  wrapping row (button groups, tags)
+ *   .lcars-grid     responsive auto-fit grid
+ *   .lcars-split    two ends of a row pushed apart
+ *
+ * Spacing for all helpers comes from --lcars-space.
+ */
+
+.lcars-app {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--lcars-gap) * 2);
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: var(--lcars-app-padding, clamp(0.5rem, 1.5vw, 1.25rem));
+  background-color: var(--lcars-bg);
+}
+
+.lcars-app > :last-child {
+  flex: 1 1 auto;
+}
+
+.lcars-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcars-space);
+}
+
+.lcars-stack > * {
+  margin-block: 0;
+}
+
+.lcars-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--lcars-space) / 2);
+}
+
+.lcars-grid {
+  display: grid;
+  gap: var(--lcars-space);
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--lcars-grid-min, 16rem), 100%), 1fr));
+}
+
+.lcars-span-all {
+  grid-column: 1 / -1;
+}
+
+.lcars-split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--lcars-space);
+}

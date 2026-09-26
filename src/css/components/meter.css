@@ -1,0 +1,50 @@
+/*
+ * .lcars-meter — segmented level indicator. Drive it with --lcars-value
+ * (0–1) and describe it for assistive tech with role="meter":
+ *
+ *   <div class="lcars-meter" style="--lcars-value: .72"
+ *        role="meter" aria-label="Warp core" aria-valuenow="72"
+ *        aria-valuemin="0" aria-valuemax="100"></div>
+ *
+ * --solid removes the segment gaps; --round caps the ends.
+ * lcars.js keeps --lcars-value in sync with aria-valuenow automatically.
+ */
+
+.lcars-meter {
+  --lcars-c: var(--lcars-tertiary);
+  --_v: clamp(0, var(--lcars-value, 0), 1);
+  --_seg: var(--lcars-meter-segment, 0.6rem);
+  display: block;
+  width: 100%;
+  height: var(--lcars-meter-height, 1rem);
+  background: linear-gradient(
+    to right,
+    var(--lcars-c) calc(var(--_v) * 100%),
+    color-mix(in srgb, var(--lcars-c) 20%, transparent) 0
+  );
+  mask: repeating-linear-gradient(to right, #000 0 calc(var(--_seg) - var(--lcars-gap)), transparent 0 var(--_seg));
+}
+
+.lcars-meter--solid {
+  mask: none;
+}
+
+.lcars-meter--round {
+  border-radius: var(--lcars-pill);
+}
+
+.lcars-meter--vertical {
+  width: var(--lcars-meter-height, 1rem);
+  height: 100%;
+  min-height: 6rem;
+  background: linear-gradient(
+    to top,
+    var(--lcars-c) calc(var(--_v) * 100%),
+    color-mix(in srgb, var(--lcars-c) 20%, transparent) 0
+  );
+  mask: repeating-linear-gradient(to top, #000 0 calc(var(--_seg) - var(--lcars-gap)), transparent 0 var(--_seg));
+}
+
+.lcars-meter--vertical.lcars-meter--solid {
+  mask: none;
+}

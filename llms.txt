@@ -1,0 +1,27 @@
+# LCARS
+
+> Framework-agnostic LCARS (Star Trek computer interface) design system for web apps: plain CSS classes and design tokens in cascade layers, themes for every Star Trek series, and an optional dependency-free ES module. Works with any stack that outputs HTML.
+
+Essentials:
+- Load `https://cdn.jsdelivr.net/gh/janos97/lcars@master/dist/lcars.min.css` (and optionally `https://cdn.jsdelivr.net/gh/janos97/lcars@master/dist/lcars.js` as a module); put `class="lcars"` on <html>.
+- Page = `.lcars-app` > `.lcars-frame` (parts: `__elbow-top`, `__bar-top`, `__side`, `__main`, `__elbow-bottom`, `__bar-bottom`, all direct children).
+- Color pieces with `lcars-c-{primary|secondary|tertiary|accent|muted|alert}` so themes work; themes via `data-lcars-theme` = tng, tos, snw, dis, ent, ds9, voy, nemesis, ld, pro, pic, red-alert.
+- 14 components, 128 classes, 55 tokens; every one is listed in the reference and manifest.
+
+## Docs
+
+- [Full context (single file)](https://raw.githubusercontent.com/janos97/lcars/master/llms-full.txt): rules, mistakes, complete reference and all recipes — load this when implementing.
+- [API reference](https://raw.githubusercontent.com/janos97/lcars/master/docs/reference.md): rules, components, utilities, tokens, themes, JS.
+- [Recipes](https://raw.githubusercontent.com/janos97/lcars/master/docs/recipes.md): copy-paste markup for app-shell, header-only, sidebar-nav, dashboard-tiles, section-heading, data-table, form, tabs, dialog.
+- [Manifest](https://raw.githubusercontent.com/janos97/lcars/master/dist/lcars.manifest.json): the same API as JSON (classes, tokens, themes, attributes).
+
+## Examples
+
+- [Component library](https://raw.githubusercontent.com/janos97/lcars/master/examples/index.html): every component with its source.
+- [Operations dashboard](https://raw.githubusercontent.com/janos97/lcars/master/examples/dashboard.html): a complete app.
+- [Starter](https://raw.githubusercontent.com/janos97/lcars/master/examples/starter.html): minimal page to copy.
+
+## Optional
+
+- [README](https://raw.githubusercontent.com/janos97/lcars/master/README.md): overview, install, development.
+- [Source CSS](https://github.com/janos97/lcars/tree/master/src/css): tokens.css, themes.css, frame.css, components/.

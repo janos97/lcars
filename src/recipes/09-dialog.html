@@ -1,0 +1,26 @@
+<!--
+title: Dialog
+summary: Modal confirmation using a native <dialog class="lcars-dialog">; the frame inside gives it LCARS chrome.
+-->
+<button class="lcars-button lcars-c-alert" type="button" onclick="document.getElementById('self-destruct').showModal()">Self-destruct…</button>
+
+<dialog class="lcars-dialog" id="self-destruct" aria-labelledby="sd-h">
+  <form method="dialog" class="lcars-frame lcars-c-alert">
+    <div class="lcars-frame__elbow-top">Auth</div>
+    <div class="lcars-frame__bar-top">
+      <span class="lcars-block lcars-c-alert lcars-grow-3"></span>
+      <span class="lcars-block lcars-c-alert lcars-round-end"></span>
+    </div>
+    <div class="lcars-frame__side">
+      <div class="lcars-block lcars-grow lcars-c-alert"></div>
+    </div>
+    <div class="lcars-frame__main lcars-stack">
+      <h2 id="sd-h">Confirm self-destruct</h2>
+      <p>Auto-destruct will engage in five minutes.</p>
+      <div class="lcars-cluster">
+        <button class="lcars-button lcars-c-alert" value="confirm">Engage</button>
+        <button class="lcars-button lcars-c-muted" value="cancel" autofocus>Abort</button>
+      </div>
+    </div>
+  </form>
+</dialog>

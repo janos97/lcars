@@ -1,0 +1,30 @@
+<!--
+title: Sidebar navigation
+summary: Body frame whose sidebar holds the main navigation — current item marked with aria-current, a filler block, and an action pinned to the bottom.
+page: true
+-->
+<div class="lcars-app">
+  <div class="lcars-frame">
+    <div class="lcars-frame__elbow-top">Nav</div>
+    <div class="lcars-frame__bar-top">
+      <span class="lcars-block lcars-grow-3"></span>
+      <span class="lcars-block lcars-c-secondary lcars-round-end"></span>
+    </div>
+    <nav class="lcars-frame__side" aria-label="Main">
+      <a class="lcars-block lcars-block--short lcars-c-accent" href="#" aria-current="page">Dashboard</a>
+      <a class="lcars-block lcars-block--short lcars-c-accent" href="#">Crew</a>
+      <a class="lcars-block lcars-block--short lcars-c-tertiary" href="#">Missions</a>
+      <a class="lcars-block lcars-block--short lcars-c-tertiary" href="#">Logs</a>
+      <div class="lcars-block lcars-grow"></div>
+      <button class="lcars-block lcars-c-alert" type="button">Sign out</button>
+    </nav>
+    <main class="lcars-frame__main">
+      <h2>Dashboard</h2>
+    </main>
+    <div class="lcars-frame__elbow-bottom lcars-c-tertiary"></div>
+    <div class="lcars-frame__bar-bottom">
+      <span class="lcars-block lcars-c-tertiary lcars-grow-4"></span>
+      <span class="lcars-block lcars-c-secondary lcars-round-end"></span>
+    </div>
+  </div>
+</div>

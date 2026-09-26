@@ -1,0 +1,23 @@
+/*
+ * .lcars-dialog — styles a native <dialog> (open it with showModal()).
+ * Put a .lcars-frame or .lcars-bracket inside for the LCARS chrome.
+ *
+ *   <dialog class="lcars-dialog" id="confirm">
+ *     <form method="dialog" class="lcars-bracket"> … </form>
+ *   </dialog>
+ */
+
+.lcars-dialog {
+  width: min(var(--lcars-dialog-width, 40rem), 100% - 2rem);
+  max-height: calc(100% - 2rem);
+  padding: var(--lcars-space);
+  border: 0;
+  background-color: var(--lcars-bg);
+  color: var(--lcars-fg);
+  font-family: var(--lcars-font);
+  letter-spacing: var(--lcars-tracking);
+}
+
+.lcars-dialog::backdrop {
+  background-color: rgb(0 0 0 / 0.8);
+}

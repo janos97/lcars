@@ -1,0 +1,203 @@
+/*
+ * Form controls.
+ *
+ *   <label class="lcars-field">
+ *     <span class="lcars-label">Destination</span>
+ *     <input class="lcars-input" placeholder="Sector 001">
+ *   </label>
+ *
+ *   .lcars-input   <input>, <select>, <textarea>
+ *   .lcars-check   checkbox / radio
+ *   .lcars-switch  checkbox rendered as a toggle
+ *   .lcars-range   <input type="range">
+ *   .lcars-choice  <label> wrapping a check/switch and its text
+ *
+ * aria-invalid="true" turns any control the alert color.
+ */
+
+.lcars-field {
+  display: grid;
+  align-content: start;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.lcars-hint {
+  color: var(--lcars-muted);
+  font-size: var(--lcars-text-xs);
+  text-transform: var(--lcars-case);
+}
+
+/* ── Text inputs, selects, textareas ──────────────────────── */
+
+.lcars-input {
+  --lcars-c: var(--lcars-tertiary);
+  display: block;
+  width: 100%;
+  min-height: var(--lcars-control);
+  margin: 0;
+  padding: 0.35em 1.1em 0.35em 0.75em;
+  border: 2px solid var(--lcars-c);
+  border-left-width: 1.25rem;
+  border-radius: var(--lcars-pill);
+  background-color: var(--lcars-bg);
+  color: var(--lcars-fg);
+  font-family: var(--lcars-font);
+  font-size: var(--lcars-text-base);
+  letter-spacing: var(--lcars-tracking);
+  line-height: 1.2;
+  transition: border-color var(--lcars-duration) ease, box-shadow var(--lcars-duration) ease;
+}
+
+.lcars-input::placeholder {
+  color: var(--lcars-muted);
+  opacity: 1;
+  text-transform: var(--lcars-case);
+}
+
+.lcars-input:hover {
+  border-color: color-mix(in srgb, var(--lcars-c) 80%, white);
+}
+
+.lcars-input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--lcars-bg), 0 0 0 4px var(--lcars-focus);
+}
+
+textarea.lcars-input {
+  min-height: 6rem;
+  border-radius: 1.25rem;
+  resize: vertical;
+}
+
+select.lcars-input {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 2.5em;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--lcars-c) 50%),
+    linear-gradient(135deg, var(--lcars-c) 50%, transparent 50%);
+  background-position:
+    right 1.35em center,
+    right 1em center;
+  background-size: 0.35em 0.35em;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+select.lcars-input option {
+  background-color: var(--lcars-bg);
+  color: var(--lcars-fg);
+}
+
+/* ── Checkboxes & radios ──────────────────────────────────── */
+
+.lcars-check,
+.lcars-switch {
+  --lcars-c: var(--lcars-tertiary);
+  -webkit-appearance: none;
+  appearance: none;
+  flex: none;
+  margin: 0;
+  border: 2px solid var(--lcars-c);
+  background-color: var(--lcars-bg);
+  cursor: pointer;
+  vertical-align: middle;
+  transition: background var(--lcars-duration) ease, border-color var(--lcars-duration) ease;
+}
+
+.lcars-check {
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 0.2rem;
+}
+
+.lcars-check[type="radio"] {
+  border-radius: 50%;
+}
+
+.lcars-check:checked {
+  background-color: var(--lcars-c);
+  box-shadow: inset 0 0 0 3px var(--lcars-bg);
+}
+
+.lcars-switch {
+  width: 3.25rem;
+  height: 1.75rem;
+  border-radius: var(--lcars-pill);
+  background: radial-gradient(circle closest-side, var(--lcars-muted) 92%, transparent) left 0.1rem center / 1.35rem 1.35rem no-repeat, var(--lcars-bg);
+}
+
+.lcars-switch:checked {
+  background: radial-gradient(circle closest-side, var(--lcars-bg) 92%, transparent) right 0.1rem center / 1.35rem 1.35rem no-repeat, var(--lcars-c);
+}
+
+:is(.lcars-check, .lcars-switch, .lcars-range):focus-visible {
+  outline: 2px solid var(--lcars-focus);
+  outline-offset: 2px;
+}
+
+:is(.lcars-input, .lcars-check, .lcars-switch, .lcars-range):disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.lcars-choice {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--lcars-font);
+  text-transform: var(--lcars-case);
+  cursor: pointer;
+}
+
+/* ── Range ────────────────────────────────────────────────── */
+
+.lcars-range {
+  --lcars-c: var(--lcars-tertiary);
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 1.75rem;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.lcars-range::-webkit-slider-runnable-track {
+  height: 0.5rem;
+  border-radius: var(--lcars-pill);
+  background-color: color-mix(in srgb, var(--lcars-c) 35%, transparent);
+}
+
+.lcars-range::-moz-range-track {
+  height: 0.5rem;
+  border-radius: var(--lcars-pill);
+  background-color: color-mix(in srgb, var(--lcars-c) 35%, transparent);
+}
+
+.lcars-range::-moz-range-progress {
+  height: 0.5rem;
+  border-radius: var(--lcars-pill);
+  background-color: var(--lcars-c);
+}
+
+.lcars-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 1rem;
+  height: 1.75rem;
+  margin-top: -0.625rem;
+  border: 0;
+  border-radius: 0.2rem;
+  background-color: var(--lcars-c);
+  box-shadow: 0 0 0 3px var(--lcars-bg);
+}
+
+.lcars-range::-moz-range-thumb {
+  width: 1rem;
+  height: 1.75rem;
+  border: 0;
+  border-radius: 0.2rem;
+  background-color: var(--lcars-c);
+  box-shadow: 0 0 0 3px var(--lcars-bg);
+}

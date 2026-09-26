@@ -1,0 +1,58 @@
+/*
+ * .lcars-data — the dense grid of numbers that fills LCARS screens.
+ * Fill it yourself, or add data-lcars-cascade="48" and let lcars.js
+ * generate and animate it.
+ *
+ *   <div class="lcars-data" style="--lcars-data-cols: 6">
+ *     <span>0417</span><span>22</span><span>9-1884</span> …
+ *   </div>
+ */
+
+.lcars-data {
+  display: grid;
+  grid-template-columns: repeat(var(--lcars-data-cols, 8), minmax(0, 1fr));
+  gap: 0.1em 1.25ch;
+  margin: 0;
+  color: var(--lcars-fg);
+  font-family: var(--lcars-font);
+  font-size: var(--lcars-text-sm);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.25;
+  text-align: end;
+  overflow: hidden;
+}
+
+.lcars-data > * {
+  transition: color 300ms ease;
+}
+
+.lcars-data > :nth-child(5n + 2) { color: var(--lcars-secondary); }
+.lcars-data > :nth-child(7n + 3) { color: var(--lcars-tertiary); }
+.lcars-data > :nth-child(11n + 5) { color: var(--lcars-primary); }
+.lcars-data > :nth-child(13n + 1) { color: var(--lcars-muted); }
+
+.lcars-data > .is-hot {
+  color: var(--lcars-active);
+  transition: none;
+}
+
+/* Key/value readout, e.g. "WARP FACTOR ···· 9.2" */
+.lcars-readout {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.25em 1rem;
+  margin: 0 0 1em;
+  font-family: var(--lcars-font);
+  font-variant-numeric: tabular-nums;
+  text-transform: var(--lcars-case);
+}
+
+.lcars-readout > dt {
+  color: var(--lcars-accent);
+}
+
+.lcars-readout > dd {
+  margin: 0;
+  color: var(--lcars-fg);
+  text-align: end;
+}

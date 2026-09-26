@@ -1,0 +1,78 @@
+/*
+ * Design tokens. Override any of these on :root (or any element) to
+ * re-skin the whole system. Components only ever read these variables.
+ *
+ * Format matters: scripts/docs.mjs parses this file to generate the token
+ * reference. Keep one declaration per line, put the description in a
+ * trailing comment, and group with "── Name ──" section comments.
+ */
+:root {
+  /* ── Palette ───────────────────────────────────────────────
+   * Named swatches. Keep this list in sync with utilities.css
+   * (test/tokens.test.mjs enforces it). */
+  --lcars-orange: #ff9900;
+  --lcars-gold: #ffaa00;
+  --lcars-butterscotch: #ff9966;
+  --lcars-peach: #ff8866;
+  --lcars-sunflower: #ffcc99;
+  --lcars-violet: #cc99ff;
+  --lcars-lilac: #cc55ff;
+  --lcars-pink: #cc99cc;
+  --lcars-magenta: #cc5599;
+  --lcars-blue: #9999ff;
+  --lcars-sky: #aaaaff;
+  --lcars-ice: #99ccff;
+  --lcars-moonlight: #ddddff;
+  --lcars-green: #99cc66;
+  --lcars-red: #d04848;
+  --lcars-mars: #ff2200;
+  --lcars-tomato: #ff5555;
+  --lcars-gray: #8a8aa6;
+  --lcars-white: #f5f6fa;
+
+  /* ── Semantic roles ────────────────────────────────────────
+   * Themes (themes.css) only reassign these. */
+  --lcars-bg: #000;                               /* page / frame background */
+  --lcars-fg: var(--lcars-sunflower);             /* body text color */
+  --lcars-on-c: #000;                             /* text on a colored piece */
+  --lcars-primary: var(--lcars-orange);           /* main frame color; default for most pieces */
+  --lcars-secondary: var(--lcars-violet);         /* second frame color; brackets default to it */
+  --lcars-tertiary: var(--lcars-blue);            /* third color; inputs, meters, tables, pills */
+  --lcars-accent: var(--lcars-butterscotch);      /* labels, table headers, readout keys */
+  --lcars-muted: var(--lcars-gray);               /* hints, placeholders, disabled-ish UI */
+  --lcars-alert: var(--lcars-tomato);             /* errors, aria-invalid, warnings */
+  --lcars-active: var(--lcars-white);             /* selected / pressed / current item */
+  --lcars-heading: var(--lcars-primary);          /* h1–h6, .lcars-title, .lcars-bar__title */
+  --lcars-link: var(--lcars-ice);                 /* inline links inside .lcars */
+  --lcars-focus: var(--lcars-white);              /* focus ring */
+
+  /* ── Typography ───────────────────────────────────────────── */
+  --lcars-font: "Antonio", "Oswald", "Roboto Condensed", "Arial Narrow", "Helvetica Neue", sans-serif; /* UI font stack */
+  --lcars-font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; /* code font stack */
+  --lcars-case: uppercase;                        /* text-transform for headings and controls; "none" for mixed case */
+  --lcars-tracking: 0.03em;                       /* letter-spacing */
+  --lcars-text-xs: 0.8125rem;                     /* bar segment labels, pills, hints */
+  --lcars-text-sm: 0.9375rem;                     /* blocks, labels, data */
+  --lcars-text-base: 1.125rem;                    /* body text and buttons */
+  --lcars-text-lg: 1.375rem;                      /* h4, large buttons */
+  --lcars-text-xl: 1.75rem;                       /* h3 */
+  --lcars-text-2xl: 2.5rem;                       /* h2 */
+  --lcars-text-3xl: clamp(2.5rem, 2rem + 3vw, 4.5rem); /* h1, .lcars-title */
+
+  /* ── Geometry ─────────────────────────────────────────────
+   * The frame is drawn entirely from these values. */
+  --lcars-gap: 0.25rem;                           /* the thin black gaps between pieces */
+  --lcars-space: 1rem;                            /* default spacing for layout helpers */
+  --lcars-side: clamp(5.5rem, 16vw, 10rem);       /* sidebar / vertical arm width */
+  --lcars-bar: 1.5rem;                            /* horizontal bar thickness */
+  --lcars-elbow-height: 4.5rem;                   /* height of an elbow block */
+  --lcars-elbow-reach: 3rem;                      /* how far the elbow's arm reaches past the sidebar */
+  --lcars-elbow-rx: 65%;                          /* outer curve, horizontal radius (% of --lcars-side) */
+  --lcars-inner-radius: 1.5rem;                   /* inner fillet where arm meets bar */
+  --lcars-block-height: 3.5rem;                   /* sidebar block height */
+  --lcars-control: 2.75rem;                       /* button / input height */
+  --lcars-pill: 100vmax;                          /* "fully rounded" radius */
+
+  /* ── Motion ───────────────────────────────────────────────── */
+  --lcars-duration: 140ms;                        /* hover / state transition time */
+}
