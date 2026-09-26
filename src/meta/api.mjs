@@ -264,7 +264,11 @@ export const components = [
     summary: "Data table with colored header rule, row caps and hover highlight.",
     elements: "<table>",
     colorDefault: "tertiary",
-    classes: { "lcars-table": "Styled table; add .lcars-num to numeric <th>/<td> for right alignment." },
+    classes: {
+      "lcars-table": "Styled table; add .lcars-num to numeric <th>/<td> for right alignment.",
+      "lcars-table--scan": "A highlight sweeps down the rows (the LCARS scanning effect). Off for reduced-motion users.",
+    },
+    vars: { "--lcars-scan-duration": "Time for one sweep of 12 rows (default 4s)." },
     a11y: "Wrap tables that can be wider than a phone in <div class=\"lcars-scroll\" tabindex=\"0\" aria-label=\"…\">.",
     example: `<table class="lcars-table">
   <thead><tr><th>Officer</th><th class="lcars-num">Shift</th></tr></thead>

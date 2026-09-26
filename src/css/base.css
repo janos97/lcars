@@ -96,6 +96,10 @@
   50% { filter: brightness(0.45); }
 }
 
+@keyframes lcars-rowscan {
+  2%, 9% { background-color: color-mix(in srgb, var(--lcars-c) 45%, transparent); }
+}
+
 @keyframes lcars-blink {
   50% { opacity: 0; }
 }

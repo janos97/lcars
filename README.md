@@ -136,7 +136,7 @@ The geometry is controlled by tokens: `--lcars-side` (sidebar width, fluid by de
 | `.lcars-meter` | Segmented level bar. Set `--lcars-value` (0–1), or `aria-valuenow` when `lcars.js` is loaded. | `--solid` `--round` `--vertical` |
 | `.lcars-data` | Dense grid of numbers. Add `data-lcars-cascade="N"` to generate and animate it. | `--lcars-data-cols` |
 | `.lcars-readout` | `<dl>` of key/value pairs. | |
-| `.lcars-table` | Data table with colored header rule and row caps. | `.lcars-num` for numeric cells |
+| `.lcars-table` | Data table with colored header rule and row caps. | `--scan` (rows light up in sequence; `--lcars-scan-duration`), `.lcars-num` for numeric cells |
 | `.lcars-field` | Label, control and hint, stacked. | `.lcars-hint` |
 | `.lcars-input` | `input`, `select` or `textarea`. | `aria-invalid="true"` switches it to the alert color |
 | `.lcars-check` / `.lcars-switch` / `.lcars-range` | Checkbox or radio, toggle switch, and slider. | Wrap in `.lcars-choice` to pair with text |
@@ -302,7 +302,7 @@ Generated files are committed so the CDN, git installs and AI tools can read the
 
 ## Credits and legal
 
-- This is a fork of [Garrett-/lcars](https://github.com/Garrett-/lcars) (MIT). The original concept and code are by Garrett-; the 2020 upstream rewrite is by Jörn Weißenborn, with audio and SVG work by Justin Warwick and fixes by xenziffen (see `AUTHORS` and `LICENSE`). This fork is a fresh implementation; from upstream it adapts the semantic sound events and the SVG control (geometry of the X/Y widget) into its own architecture.
+- This is a fork of [Garrett-/lcars](https://github.com/Garrett-/lcars) (MIT). The original concept and code are by Garrett-; the 2020 upstream rewrite is by Jörn Weißenborn, with audio, SVG and table work by Justin Warwick and contributions from xenziffen and dthv (see `AUTHORS` and `LICENSE`). This fork is a fresh implementation; from upstream it adapts the semantic sound events, the SVG control (geometry of the X/Y widget) and the table row-scan effect into its own architecture.
 - Sounds are synthesized in the browser; no audio recordings are bundled. Use `LCARS.setSounds()` with audio you have the rights to.
 - The [Antonio](https://github.com/googlefonts/antonioFont) typeface is bundled under the SIL Open Font License 1.1 (`src/fonts/OFL.txt`).
 - LCARS and Star Trek are trademarks of CBS Studios / Paramount. This is an unofficial fan project, not affiliated with or endorsed by them.

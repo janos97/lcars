@@ -354,6 +354,11 @@ Data table with colored header rule, row caps and hover highlight.
 | Class | Description |
 | --- | --- |
 | `lcars-table` | Styled table; add .lcars-num to numeric <th>/<td> for right alignment. |
+| `lcars-table--scan` | A highlight sweeps down the rows (the LCARS scanning effect). Off for reduced-motion users. |
+
+| Custom property | Description |
+| --- | --- |
+| `--lcars-scan-duration` | Time for one sweep of 12 rows (default 4s). |
 
 **Accessibility:** Wrap tables that can be wider than a phone in <div class="lcars-scroll" tabindex="0" aria-label="…">.
 

@@ -56,3 +56,25 @@
 .lcars-table :is(th, td).lcars-num {
   text-align: end;
 }
+
+/* --scan: a highlight sweeps down the rows, the LCARS "scanning" effect
+ * (after upstream's rowscan by jrwarwick). One sweep of 12 row slots per
+ * --lcars-scan-duration; off for reduced-motion users. */
+.lcars-table--scan tbody tr:nth-child(12n + 2) { --_row: 1; }
+.lcars-table--scan tbody tr:nth-child(12n + 3) { --_row: 2; }
+.lcars-table--scan tbody tr:nth-child(12n + 4) { --_row: 3; }
+.lcars-table--scan tbody tr:nth-child(12n + 5) { --_row: 4; }
+.lcars-table--scan tbody tr:nth-child(12n + 6) { --_row: 5; }
+.lcars-table--scan tbody tr:nth-child(12n + 7) { --_row: 6; }
+.lcars-table--scan tbody tr:nth-child(12n + 8) { --_row: 7; }
+.lcars-table--scan tbody tr:nth-child(12n + 9) { --_row: 8; }
+.lcars-table--scan tbody tr:nth-child(12n + 10) { --_row: 9; }
+.lcars-table--scan tbody tr:nth-child(12n + 11) { --_row: 10; }
+.lcars-table--scan tbody tr:nth-child(12n + 12) { --_row: 11; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .lcars-table--scan tbody td {
+    animation: lcars-rowscan var(--lcars-scan-duration, 4s) linear infinite;
+    animation-delay: calc(var(--lcars-scan-duration, 4s) / 12 * var(--_row, 0));
+  }
+}

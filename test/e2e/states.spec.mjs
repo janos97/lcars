@@ -50,3 +50,22 @@ test("dialog opens as a modal and closes", async ({ page }) => {
   await page.getByRole("button", { name: "Abort" }).click();
   await expect(dialog).toBeHidden();
 });
+
+test.describe("table row scan", () => {
+  test("rows animate in sequence", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "no-preference" });
+    await page.goto("/examples/dashboard.html");
+    const cells = page.locator(".lcars-table--scan tbody tr td:first-child");
+    const style = (i) => cells.nth(i).evaluate((el) => [getComputedStyle(el).animationName, parseFloat(getComputedStyle(el).animationDelay)]);
+    const [first, second] = [await style(0), await style(1)];
+    expect(first[0]).toBe("lcars-rowscan");
+    expect(second[1]).toBeGreaterThan(first[1]);
+  });
+
+  test("is off with reduced motion", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/examples/dashboard.html");
+    const name = await page.locator(".lcars-table--scan tbody td").first().evaluate((el) => getComputedStyle(el).animationName);
+    expect(name).toBe("none");
+  });
+});
